@@ -9,15 +9,31 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # API v1
-    path('api/v1/auth/', include('apps.accounts.urls')),
-    path('api/v1/properties/', include('apps.properties.urls')),
-    path('api/v1/boards/', include('apps.qr_boards.urls')),
-    path('api/v1/qr/', include('apps.qr_boards.redirect_urls')),
-    path('api/v1/offers/', include('apps.offers.urls')),
-    path('api/v1/bookings/', include('apps.bookings.urls')),
-    path('api/v1/notifications/', include('apps.notifications.urls')),
-    path('api/v1/chat/', include('apps.chat.urls')),
+    # ── User (Buyer) Scope ──────────────────────────────────────────
+    path('api/v1/user/', include([
+        path('auth/', include('apps.accounts.urls_user')),
+        path('properties/', include('apps.properties.urls_user')),
+        path('bookings/', include('apps.bookings.urls_user')),
+        path('offers/', include('apps.offers.urls_user')),
+        path('notifications/', include('apps.notifications.urls_role')),
+        path('chat/', include('apps.chat.urls')),
+    ])),
+
+    # ── Agent (Seller) Scope ─────────────────────────────────────────
+    path('api/v1/agent/', include([
+        path('auth/', include('apps.accounts.urls_agent')),
+        path('properties/', include('apps.properties.urls_agent')),
+        path('bookings/', include('apps.bookings.urls_agent')),
+        path('offers/', include('apps.offers.urls_agent')),
+        path('notifications/', include('apps.notifications.urls_role')),
+        path('boards/', include('apps.qr_boards.urls')),
+    ])),
+
+    # ── Admin Scope ──────────────────────────────────────────────────
     path('api/v1/admin/', include('apps.admin_panel.urls')),
+
+    # ── Neutral / Public Endpoints ──────────────────────────────────
+    path('api/v1/qr/', include('apps.qr_boards.redirect_urls')),
 
     # API Docs
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
