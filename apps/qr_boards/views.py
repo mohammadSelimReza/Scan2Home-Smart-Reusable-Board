@@ -10,6 +10,7 @@ from .serializers import QRBoardSerializer, ReassignBoardSerializer
 from apps.accounts.permissions import IsAgent
 from apps.properties.models import Property
 from apps.notifications.services import NotificationService
+from apps.common.doc_examples import REASSIGN_BOARD_REQUEST
 
 
 class QRBoardListCreateView(APIView):
@@ -41,7 +42,12 @@ class QRBoardDetailView(APIView):
 class QRBoardReassignView(APIView):
     permission_classes = [IsAgent]
 
-    @extend_schema(request=ReassignBoardSerializer, responses=QRBoardSerializer, tags=['QR Boards'])
+    @extend_schema(
+        request=ReassignBoardSerializer,
+        responses=QRBoardSerializer,
+        examples=[REASSIGN_BOARD_REQUEST],
+        tags=['QR Boards']
+    )
     def patch(self, request, qr_id):
         board = get_object_or_404(QRBoard, id=qr_id, agent=request.user)
         serializer = ReassignBoardSerializer(data=request.data)

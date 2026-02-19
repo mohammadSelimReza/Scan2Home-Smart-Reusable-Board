@@ -233,7 +233,7 @@
           "response": []
         },
         {
-          "name": "v1_admin_settings_property_types_retrieve",
+          "name": "v1_admin_settings_property_types_list",
           "request": {
             "method": "GET",
             "header": [
@@ -284,7 +284,11 @@
               ],
               "query": []
             },
-            "description": ""
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"slug\": \"string\"\n}"
+            }
           },
           "response": []
         },
@@ -373,7 +377,7 @@
           "response": []
         },
         {
-          "name": "v1_admin_support_retrieve",
+          "name": "v1_admin_support_list",
           "request": {
             "method": "GET",
             "header": [
@@ -424,7 +428,11 @@
               ],
               "query": []
             },
-            "description": ""
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reply\": \"string\"\n}"
+            }
           },
           "response": []
         },
@@ -686,7 +694,11 @@
               ],
               "query": []
             },
-            "description": ""
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+            }
           },
           "response": []
         },
@@ -875,7 +887,7 @@
           "response": []
         },
         {
-          "name": "v1_boards_retrieve",
+          "name": "v1_boards_list",
           "request": {
             "method": "GET",
             "header": [
@@ -927,7 +939,7 @@
           "response": []
         },
         {
-          "name": "v1_boards_retrieve_2",
+          "name": "v1_boards_retrieve",
           "request": {
             "method": "GET",
             "header": [
@@ -1014,7 +1026,7 @@
           "response": []
         },
         {
-          "name": "v1_bookings_agent_retrieve",
+          "name": "v1_bookings_agent_list",
           "request": {
             "method": "GET",
             "header": [
@@ -1041,7 +1053,7 @@
           "response": []
         },
         {
-          "name": "v1_bookings_my_retrieve",
+          "name": "v1_bookings_my_list",
           "request": {
             "method": "GET",
             "header": [
@@ -1068,7 +1080,7 @@
           "response": []
         },
         {
-          "name": "v1_notifications_retrieve",
+          "name": "v1_notifications_list",
           "request": {
             "method": "GET",
             "header": [
@@ -1298,7 +1310,7 @@
           "response": []
         },
         {
-          "name": "v1_offers_agent_retrieve",
+          "name": "v1_offers_agent_list",
           "request": {
             "method": "GET",
             "header": [
@@ -1318,14 +1330,20 @@
                 "offers",
                 "agent"
               ],
-              "query": []
+              "query": [
+                {
+                  "key": "status",
+                  "value": "",
+                  "description": "Filter by status (pending, accepted, rejected)"
+                }
+              ]
             },
             "description": ""
           },
           "response": []
         },
         {
-          "name": "v1_properties_retrieve",
+          "name": "v1_properties_list",
           "request": {
             "method": "GET",
             "header": [
@@ -1344,14 +1362,60 @@
                 "v1",
                 "properties"
               ],
-              "query": []
+              "query": [
+                {
+                  "key": "beds",
+                  "value": "",
+                  "description": "Number of beds (e.g. 1, 2, 5+)"
+                },
+                {
+                  "key": "garden",
+                  "value": "",
+                  "description": "Has garden"
+                },
+                {
+                  "key": "parking",
+                  "value": "",
+                  "description": "Has parking"
+                },
+                {
+                  "key": "pet_friendly",
+                  "value": "",
+                  "description": "Is pet friendly"
+                },
+                {
+                  "key": "pool",
+                  "value": "",
+                  "description": "Has pool"
+                },
+                {
+                  "key": "price_max",
+                  "value": "",
+                  "description": "Maximum price"
+                },
+                {
+                  "key": "price_min",
+                  "value": "",
+                  "description": "Minimum price"
+                },
+                {
+                  "key": "search",
+                  "value": "",
+                  "description": "Search by title, address, postcode"
+                },
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "Filter by property type (apartment, villa, etc)"
+                }
+              ]
             },
             "description": ""
           },
           "response": []
         },
         {
-          "name": "v1_properties_retrieve_2",
+          "name": "v1_properties_retrieve",
           "request": {
             "method": "GET",
             "header": [
@@ -1468,7 +1532,7 @@
           "response": []
         },
         {
-          "name": "v1_properties_similar_retrieve",
+          "name": "v1_properties_similar_list",
           "request": {
             "method": "GET",
             "header": [
@@ -1519,7 +1583,11 @@
               ],
               "query": []
             },
-            "description": ""
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"video_file\": \"string\"\n}"
+            }
           },
           "response": []
         },
@@ -1555,7 +1623,7 @@
           "response": []
         },
         {
-          "name": "v1_properties_my_retrieve",
+          "name": "v1_properties_my_list",
           "request": {
             "method": "GET",
             "header": [
@@ -1725,7 +1793,11 @@
               ],
               "query": []
             },
-            "description": ""
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+            }
           },
           "response": []
         },
@@ -1972,7 +2044,7 @@
           "response": []
         },
         {
-          "name": "v1_bookings_my_retrieve",
+          "name": "v1_bookings_my_list",
           "request": {
             "method": "GET",
             "header": [
@@ -2020,12 +2092,16 @@
               ],
               "query": []
             },
-            "description": ""
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"string\"\n}"
+            }
           },
           "response": []
         },
         {
-          "name": "v1_notifications_retrieve",
+          "name": "v1_notifications_list",
           "request": {
             "method": "GET",
             "header": [
@@ -2106,7 +2182,7 @@
           "response": []
         },
         {
-          "name": "v1_properties_retrieve",
+          "name": "v1_properties_list",
           "request": {
             "method": "GET",
             "header": [
@@ -2125,14 +2201,60 @@
                 "v1",
                 "properties"
               ],
-              "query": []
+              "query": [
+                {
+                  "key": "beds",
+                  "value": "",
+                  "description": "Number of beds (e.g. 1, 2, 5+)"
+                },
+                {
+                  "key": "garden",
+                  "value": "",
+                  "description": "Has garden"
+                },
+                {
+                  "key": "parking",
+                  "value": "",
+                  "description": "Has parking"
+                },
+                {
+                  "key": "pet_friendly",
+                  "value": "",
+                  "description": "Is pet friendly"
+                },
+                {
+                  "key": "pool",
+                  "value": "",
+                  "description": "Has pool"
+                },
+                {
+                  "key": "price_max",
+                  "value": "",
+                  "description": "Maximum price"
+                },
+                {
+                  "key": "price_min",
+                  "value": "",
+                  "description": "Minimum price"
+                },
+                {
+                  "key": "search",
+                  "value": "",
+                  "description": "Search by title, address, postcode"
+                },
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "Filter by property type (apartment, villa, etc)"
+                }
+              ]
             },
             "description": ""
           },
           "response": []
         },
         {
-          "name": "v1_properties_retrieve_2",
+          "name": "v1_properties_retrieve",
           "request": {
             "method": "GET",
             "header": [
@@ -2187,7 +2309,7 @@
           "response": []
         },
         {
-          "name": "v1_properties_similar_retrieve",
+          "name": "v1_properties_similar_list",
           "request": {
             "method": "GET",
             "header": [
@@ -2215,7 +2337,7 @@
           "response": []
         },
         {
-          "name": "v1_properties_favourites_retrieve",
+          "name": "v1_properties_favourites_list",
           "request": {
             "method": "GET",
             "header": [
@@ -2242,7 +2364,7 @@
           "response": []
         },
         {
-          "name": "v1_properties_my_retrieve",
+          "name": "v1_properties_my_list",
           "request": {
             "method": "GET",
             "header": [
@@ -2291,7 +2413,11 @@
               ],
               "query": []
             },
-            "description": ""
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"string\"\n}"
+            }
           },
           "response": []
         }

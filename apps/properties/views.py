@@ -13,6 +13,7 @@ from .serializers import (
     FavouriteSerializer, PropertyVideoUploadSerializer, SupportMessageSerializer
 )
 from apps.accounts.permissions import IsAgent
+from apps.common.doc_examples import PROPERTY_CREATE_REQUEST, PROPERTY_RESPONSE
 
 
 class PropertyListView(APIView):
@@ -83,7 +84,12 @@ class PropertyListView(APIView):
 class PropertyCreateView(APIView):
     permission_classes = [IsAgent]
 
-    @extend_schema(request=PropertyCreateUpdateSerializer, responses=PropertyDetailSerializer, tags=['Properties'])
+    @extend_schema(
+        request=PropertyCreateUpdateSerializer,
+        responses=PropertyDetailSerializer,
+        examples=[PROPERTY_CREATE_REQUEST, PROPERTY_RESPONSE],
+        tags=['Properties']
+    )
     def post(self, request):
         serializer = PropertyCreateUpdateSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)

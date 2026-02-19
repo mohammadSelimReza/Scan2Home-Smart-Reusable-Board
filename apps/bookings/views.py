@@ -9,12 +9,18 @@ from .models import Booking
 from .serializers import BookingSerializer
 from apps.accounts.permissions import IsAgent
 from apps.notifications.services import NotificationService
+from apps.common.doc_examples import BOOKING_CREATE_REQUEST
 
 
 class BookingCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
-    @extend_schema(request=BookingSerializer, responses=BookingSerializer, tags=['Bookings'])
+    @extend_schema(
+        request=BookingSerializer,
+        responses=BookingSerializer,
+        examples=[BOOKING_CREATE_REQUEST],
+        tags=['Bookings']
+    )
     def post(self, request):
         serializer = BookingSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)

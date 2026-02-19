@@ -48,7 +48,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminActionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -77,7 +84,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminActionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -95,7 +109,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminDashboard"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -150,7 +171,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminActionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -191,7 +219,7 @@
         },
         "/api/v1/admin/settings/property-types/": {
             "get": {
-                "operationId": "v1_admin_settings_property_types_retrieve",
+                "operationId": "v1_admin_settings_property_types_list",
                 "tags": [
                     "Admin Settings"
                 ],
@@ -202,7 +230,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PropertyType"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             },
@@ -211,6 +249,26 @@
                 "tags": [
                     "Admin Settings"
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PropertyType"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PropertyType"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PropertyType"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "security": [
                     {
                         "jwtAuth": []
@@ -218,7 +276,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PropertyType"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             },
@@ -275,7 +340,7 @@
         },
         "/api/v1/admin/support/": {
             "get": {
-                "operationId": "v1_admin_support_retrieve",
+                "operationId": "v1_admin_support_list",
                 "tags": [
                     "Admin Settings"
                 ],
@@ -286,7 +351,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AdminSupportMessage"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -308,6 +383,26 @@
                 "tags": [
                     "Admin Settings"
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SupportReply"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SupportReply"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SupportReply"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "security": [
                     {
                         "jwtAuth": []
@@ -315,7 +410,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminActionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -390,7 +492,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminActionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -447,7 +556,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminActionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -485,7 +601,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Password updated"
                     }
                 }
             }
@@ -542,7 +658,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "OTP sent"
                     }
                 }
             }
@@ -553,6 +669,35 @@
                 "tags": [
                     "Auth"
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            },
+                            "examples": {
+                                "LoginRequest": {
+                                    "value": {
+                                        "email": "buyer@example.com",
+                                        "password": "StrongPassword123!"
+                                    },
+                                    "summary": "Login Request"
+                                }
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "security": [
                     {
                         "jwtAuth": []
@@ -561,7 +706,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Login successful"
                     }
                 }
             }
@@ -621,7 +766,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserProfile"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -637,6 +789,19 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/AgentRegister"
+                            },
+                            "examples": {
+                                "AgentRegistration": {
+                                    "value": {
+                                        "full_name": "Alice Agent",
+                                        "email": "agent@agency.com",
+                                        "phone": "+1987654321",
+                                        "password": "StrongPassword123!",
+                                        "brand_name": "Luxury Estates",
+                                        "website": "https://luxuryestates.com"
+                                    },
+                                    "summary": "Agent Registration"
+                                }
                             }
                         },
                         "application/x-www-form-urlencoded": {
@@ -660,7 +825,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "User registered successfully"
                     }
                 }
             }
@@ -676,6 +841,17 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/BuyerRegister"
+                            },
+                            "examples": {
+                                "BuyerRegistration": {
+                                    "value": {
+                                        "full_name": "John Doe",
+                                        "email": "buyer@example.com",
+                                        "phone": "+1234567890",
+                                        "password": "StrongPassword123!"
+                                    },
+                                    "summary": "Buyer Registration"
+                                }
                             }
                         },
                         "application/x-www-form-urlencoded": {
@@ -699,7 +875,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "User registered successfully"
                     }
                 }
             }
@@ -738,7 +914,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Password reset successfully"
                     }
                 }
             }
@@ -818,14 +994,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "OTP verified"
                     }
                 }
             }
         },
         "/api/v1/boards/": {
             "get": {
-                "operationId": "v1_boards_retrieve",
+                "operationId": "v1_boards_list",
                 "tags": [
                     "QR Boards"
                 ],
@@ -836,7 +1012,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/QRBoard"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             },
@@ -852,14 +1038,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QRBoard"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/boards/{qr_id}/": {
             "get": {
-                "operationId": "v1_boards_retrieve_2",
+                "operationId": "v1_boards_retrieve",
                 "parameters": [
                     {
                         "in": "path",
@@ -881,7 +1074,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QRBoard"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -910,7 +1110,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "qr_code_url": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "QR Code URL"
                     }
                 }
             }
@@ -937,6 +1149,14 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/PatchedReassignBoard"
+                            },
+                            "examples": {
+                                "ReassignBoard": {
+                                    "value": {
+                                        "property_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                                    },
+                                    "summary": "Reassign Board"
+                                }
                             }
                         },
                         "application/x-www-form-urlencoded": {
@@ -958,7 +1178,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QRBoard"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -974,6 +1201,17 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/Booking"
+                            },
+                            "examples": {
+                                "CreateBooking": {
+                                    "value": {
+                                        "property": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                        "date": "2023-12-25",
+                                        "time_slot": "14:00",
+                                        "message": "Is it okay if I bring my architect?"
+                                    },
+                                    "summary": "Create Booking"
+                                }
                             }
                         },
                         "application/x-www-form-urlencoded": {
@@ -996,7 +1234,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Booking"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1033,14 +1278,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Booking"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/bookings/agent/": {
             "get": {
-                "operationId": "v1_bookings_agent_retrieve",
+                "operationId": "v1_bookings_agent_list",
                 "tags": [
                     "Bookings"
                 ],
@@ -1051,14 +1303,24 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Booking"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/bookings/my/": {
             "get": {
-                "operationId": "v1_bookings_my_retrieve",
+                "operationId": "v1_bookings_my_list",
                 "tags": [
                     "Bookings"
                 ],
@@ -1069,7 +1331,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Booking"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1080,6 +1352,26 @@
                 "tags": [
                     "Chat"
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatMessage"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatMessage"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatMessage"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "security": [
                     {
                         "jwtAuth": []
@@ -1087,14 +1379,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/notifications/": {
             "get": {
-                "operationId": "v1_notifications_retrieve",
+                "operationId": "v1_notifications_list",
                 "tags": [
                     "Notifications"
                 ],
@@ -1105,7 +1404,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Notification"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1134,7 +1443,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Marked as read"
                     }
                 }
             }
@@ -1152,7 +1461,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotificationSettings"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             },
@@ -1187,7 +1503,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotificationSettings"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1203,6 +1526,19 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/Offer"
+                            },
+                            "examples": {
+                                "SubmitOffer": {
+                                    "value": {
+                                        "property": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                        "offer_amount": "440000.00",
+                                        "message": "We love the kitchen!",
+                                        "buyer_name": "John Doe",
+                                        "buyer_email": "buyer@example.com",
+                                        "buyer_phone": "+1234567890"
+                                    },
+                                    "summary": "Submit Offer"
+                                }
                             }
                         },
                         "application/x-www-form-urlencoded": {
@@ -1226,7 +1562,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Offer"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1263,7 +1606,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Action performed"
                     }
                 }
             }
@@ -1290,6 +1633,15 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/CounterOfferCreate"
+                            },
+                            "examples": {
+                                "CounterOffer": {
+                                    "value": {
+                                        "amount": "445000.00",
+                                        "message": "We can meet in the middle."
+                                    },
+                                    "summary": "Counter Offer"
+                                }
                             }
                         },
                         "application/x-www-form-urlencoded": {
@@ -1312,7 +1664,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CounterOffer"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1341,14 +1700,31 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Offer"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/offers/agent/": {
             "get": {
-                "operationId": "v1_offers_agent_retrieve",
+                "operationId": "v1_offers_agent_list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "status",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter by status (pending, accepted, rejected)"
+                    }
+                ],
                 "tags": [
                     "Offers"
                 ],
@@ -1359,14 +1735,100 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Offer"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/properties/": {
             "get": {
-                "operationId": "v1_properties_retrieve",
+                "operationId": "v1_properties_list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "beds",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Number of beds (e.g. 1, 2, 5+)"
+                    },
+                    {
+                        "in": "query",
+                        "name": "garden",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Has garden"
+                    },
+                    {
+                        "in": "query",
+                        "name": "parking",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Has parking"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pet_friendly",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Is pet friendly"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pool",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Has pool"
+                    },
+                    {
+                        "in": "query",
+                        "name": "price_max",
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        },
+                        "description": "Maximum price"
+                    },
+                    {
+                        "in": "query",
+                        "name": "price_min",
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        },
+                        "description": "Minimum price"
+                    },
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Search by title, address, postcode"
+                    },
+                    {
+                        "in": "query",
+                        "name": "type",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter by property type (apartment, villa, etc)"
+                    }
+                ],
                 "tags": [
                     "Properties"
                 ],
@@ -1378,14 +1840,24 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PropertyList"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/properties/{id}/": {
             "get": {
-                "operationId": "v1_properties_retrieve_2",
+                "operationId": "v1_properties_retrieve",
                 "parameters": [
                     {
                         "in": "path",
@@ -1408,7 +1880,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PropertyDetail"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             },
@@ -1455,7 +1934,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PropertyDetail"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             },
@@ -1512,7 +1998,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Favourited status toggled"
                     }
                 }
             }
@@ -1561,14 +2047,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PropertyImageUpload"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/properties/{id}/similar/": {
             "get": {
-                "operationId": "v1_properties_similar_retrieve",
+                "operationId": "v1_properties_similar_list",
                 "parameters": [
                     {
                         "in": "path",
@@ -1591,7 +2084,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PropertyList"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1613,6 +2116,26 @@
                 "tags": [
                     "Properties"
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PropertyVideoUpload"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PropertyVideoUpload"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PropertyVideoUpload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "security": [
                     {
                         "jwtAuth": []
@@ -1620,7 +2143,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Video uploaded"
                     }
                 }
             }
@@ -1636,6 +2159,25 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/PropertyCreateUpdate"
+                            },
+                            "examples": {
+                                "CreateProperty": {
+                                    "value": {
+                                        "title": "Modern Villa with Sea View",
+                                        "property_type": "villa",
+                                        "price": "450000.00",
+                                        "address": "123 Ocean Drive, Miami",
+                                        "postcode": "33139",
+                                        "status": "sale",
+                                        "beds": 4,
+                                        "baths": 3,
+                                        "size_sqft": 2500,
+                                        "lat": 25.7617,
+                                        "lon": -80.1918,
+                                        "description": "Beautiful fully furnished villa..."
+                                    },
+                                    "summary": "Create Property"
+                                }
                             }
                         },
                         "application/x-www-form-urlencoded": {
@@ -1658,14 +2200,43 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PropertyDetail"
+                                },
+                                "examples": {
+                                    "PropertyDetail": {
+                                        "value": {
+                                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                            "title": "Modern Villa",
+                                            "price": "450000.00",
+                                            "images": [
+                                                {
+                                                    "id": 1,
+                                                    "image": "http://.../img.jpg",
+                                                    "is_cover": true
+                                                }
+                                            ],
+                                            "agent": {
+                                                "id": "...",
+                                                "full_name": "Alice Agent",
+                                                "email": "agent@agency.com"
+                                            }
+                                        },
+                                        "summary": "Property Detail"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/properties/favourites/": {
             "get": {
-                "operationId": "v1_properties_favourites_retrieve",
+                "operationId": "v1_properties_favourites_list",
                 "tags": [
                     "Favourites"
                 ],
@@ -1676,14 +2247,24 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Favourite"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
         },
         "/api/v1/properties/my/": {
             "get": {
-                "operationId": "v1_properties_my_retrieve",
+                "operationId": "v1_properties_my_list",
                 "description": "Agent's own property list",
                 "tags": [
                     "Properties"
@@ -1695,7 +2276,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PropertyList"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -1706,6 +2297,26 @@
                 "tags": [
                     "Support"
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SupportMessage"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SupportMessage"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SupportMessage"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "security": [
                     {
                         "jwtAuth": []
@@ -1713,7 +2324,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "description": "Support request sent"
                     }
                 }
             }
@@ -1738,7 +2349,22 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "No response body"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "redirect_url": {
+                                            "type": "string"
+                                        },
+                                        "property_id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Redirect URL"
                     }
                 }
             }
@@ -1746,6 +2372,128 @@
     },
     "components": {
         "schemas": {
+            "AdminActionResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            },
+            "AdminDashboard": {
+                "type": "object",
+                "properties": {
+                    "total_users": {
+                        "type": "integer"
+                    },
+                    "total_agents": {
+                        "type": "integer"
+                    },
+                    "total_agents_verified": {
+                        "type": "integer"
+                    },
+                    "total_agents_pending": {
+                        "type": "integer"
+                    },
+                    "total_properties": {
+                        "type": "integer"
+                    },
+                    "total_properties_approved": {
+                        "type": "integer"
+                    },
+                    "total_properties_pending": {
+                        "type": "integer"
+                    },
+                    "property_by_type": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    }
+                },
+                "required": [
+                    "property_by_type",
+                    "total_agents",
+                    "total_agents_pending",
+                    "total_agents_verified",
+                    "total_properties",
+                    "total_properties_approved",
+                    "total_properties_pending",
+                    "total_users"
+                ]
+            },
+            "AdminSupportMessage": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "user": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "reply": {
+                        "type": "string"
+                    },
+                    "is_replied": {
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "replied_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "created_at",
+                    "email",
+                    "id",
+                    "message",
+                    "user"
+                ]
+            },
+            "AgentMinimal": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "full_name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "agent_profile": {
+                        "$ref": "#/components/schemas/AgentProfile"
+                    }
+                },
+                "required": [
+                    "agent_profile",
+                    "email",
+                    "full_name",
+                    "id",
+                    "phone"
+                ]
+            },
             "AgentProfile": {
                 "type": "object",
                 "properties": {
@@ -1826,6 +2574,37 @@
                     "email",
                     "full_name",
                     "password"
+                ]
+            },
+            "BoardAssignment": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "property": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PropertyList"
+                            }
+                        ],
+                        "readOnly": true
+                    },
+                    "assigned_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "is_active": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "assigned_at",
+                    "id",
+                    "property"
                 ]
             },
             "Booking": {
@@ -1939,6 +2718,33 @@
                     "old_password"
                 ]
             },
+            "ChatMessage": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "maxLength": 1000
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            },
+            "ChatResponse": {
+                "type": "object",
+                "properties": {
+                    "reply": {
+                        "type": "string"
+                    },
+                    "fallback": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "required": [
+                    "reply"
+                ]
+            },
             "CounterOffer": {
                 "type": "object",
                 "properties": {
@@ -1988,6 +2794,34 @@
                     "amount"
                 ]
             },
+            "Favourite": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "property": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PropertyList"
+                            }
+                        ],
+                        "readOnly": true
+                    },
+                    "added_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "added_at",
+                    "id",
+                    "property"
+                ]
+            },
             "ForgotPassword": {
                 "type": "object",
                 "properties": {
@@ -1999,6 +2833,87 @@
                 "required": [
                     "email"
                 ]
+            },
+            "Login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "password": {
+                        "type": "string",
+                        "writeOnly": true
+                    }
+                },
+                "required": [
+                    "email",
+                    "password"
+                ]
+            },
+            "Notification": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "body": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "notification_type": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/NotificationTypeEnum"
+                            }
+                        ],
+                        "readOnly": true
+                    },
+                    "is_read": {
+                        "type": "boolean",
+                        "readOnly": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "body",
+                    "created_at",
+                    "id",
+                    "is_read",
+                    "notification_type",
+                    "title"
+                ]
+            },
+            "NotificationSettings": {
+                "type": "object",
+                "properties": {
+                    "push_enabled": {
+                        "type": "boolean"
+                    },
+                    "email_enabled": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "NotificationTypeEnum": {
+                "enum": [
+                    "qr_scan",
+                    "offer",
+                    "booking",
+                    "system"
+                ],
+                "type": "string",
+                "description": "* `qr_scan` - QR Scan\n* `offer` - Offer\n* `booking` - Booking\n* `system` - System"
             },
             "Offer": {
                 "type": "object",
@@ -2146,7 +3061,7 @@
                         "nullable": true
                     },
                     "status": {
-                        "$ref": "#/components/schemas/PropertyCreateUpdateStatusEnum"
+                        "$ref": "#/components/schemas/Status858Enum"
                     },
                     "is_featured": {
                         "type": "boolean"
@@ -2271,7 +3186,7 @@
                         "nullable": true
                     },
                     "status": {
-                        "$ref": "#/components/schemas/PropertyCreateUpdateStatusEnum"
+                        "$ref": "#/components/schemas/Status858Enum"
                     },
                     "is_featured": {
                         "type": "boolean"
@@ -2325,14 +3240,185 @@
                     "title"
                 ]
             },
-            "PropertyCreateUpdateStatusEnum": {
-                "enum": [
-                    "available",
-                    "under_offer",
-                    "sold"
-                ],
-                "type": "string",
-                "description": "* `available` - Available\n* `under_offer` - Under Offer\n* `sold` - Sold"
+            "PropertyDetail": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PropertyImage"
+                        },
+                        "readOnly": true
+                    },
+                    "video": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PropertyVideo"
+                            }
+                        ],
+                        "readOnly": true
+                    },
+                    "agent": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AgentMinimal"
+                            }
+                        ],
+                        "readOnly": true
+                    },
+                    "is_new": {
+                        "type": "boolean",
+                        "readOnly": true
+                    },
+                    "is_favourited": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "property_type": {
+                        "$ref": "#/components/schemas/PropertyTypeEnum"
+                    },
+                    "price": {
+                        "type": "string",
+                        "format": "decimal",
+                        "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+                    },
+                    "address": {
+                        "type": "string",
+                        "maxLength": 512
+                    },
+                    "postcode": {
+                        "type": "string",
+                        "maxLength": 20
+                    },
+                    "lat": {
+                        "type": "string",
+                        "format": "decimal",
+                        "pattern": "^-?\\d{0,3}(?:\\.\\d{0,6})?$",
+                        "nullable": true
+                    },
+                    "lon": {
+                        "type": "string",
+                        "format": "decimal",
+                        "pattern": "^-?\\d{0,3}(?:\\.\\d{0,6})?$",
+                        "nullable": true
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status858Enum"
+                    },
+                    "is_featured": {
+                        "type": "boolean"
+                    },
+                    "is_approved": {
+                        "type": "boolean"
+                    },
+                    "beds": {
+                        "type": "integer",
+                        "maximum": 32767,
+                        "minimum": 0
+                    },
+                    "baths": {
+                        "type": "integer",
+                        "maximum": 32767,
+                        "minimum": 0
+                    },
+                    "size_sqft": {
+                        "type": "integer",
+                        "maximum": 2147483647,
+                        "minimum": 0
+                    },
+                    "parking_slots": {
+                        "type": "integer",
+                        "maximum": 32767,
+                        "minimum": 0
+                    },
+                    "has_pool": {
+                        "type": "boolean"
+                    },
+                    "has_garage": {
+                        "type": "boolean"
+                    },
+                    "has_garden": {
+                        "type": "boolean"
+                    },
+                    "has_fireplace": {
+                        "type": "boolean"
+                    },
+                    "is_smart_home": {
+                        "type": "boolean"
+                    },
+                    "has_gym": {
+                        "type": "boolean"
+                    },
+                    "is_pet_friendly": {
+                        "type": "boolean"
+                    },
+                    "views_count": {
+                        "type": "integer",
+                        "maximum": 2147483647,
+                        "minimum": 0
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "address",
+                    "agent",
+                    "created_at",
+                    "id",
+                    "images",
+                    "is_favourited",
+                    "is_new",
+                    "price",
+                    "title",
+                    "updated_at",
+                    "video"
+                ]
+            },
+            "PropertyImage": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "image": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "is_cover": {
+                        "type": "boolean"
+                    },
+                    "order": {
+                        "type": "integer",
+                        "maximum": 32767,
+                        "minimum": 0
+                    }
+                },
+                "required": [
+                    "id",
+                    "image"
+                ]
             },
             "PropertyImageUpload": {
                 "type": "object",
@@ -2354,6 +3440,119 @@
                     "image"
                 ]
             },
+            "PropertyList": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "property_type": {
+                        "$ref": "#/components/schemas/PropertyTypeEnum"
+                    },
+                    "price": {
+                        "type": "string",
+                        "format": "decimal",
+                        "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+                    },
+                    "address": {
+                        "type": "string",
+                        "maxLength": 512
+                    },
+                    "postcode": {
+                        "type": "string",
+                        "maxLength": 20
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status858Enum"
+                    },
+                    "is_featured": {
+                        "type": "boolean"
+                    },
+                    "is_new": {
+                        "type": "boolean",
+                        "readOnly": true
+                    },
+                    "beds": {
+                        "type": "integer",
+                        "maximum": 32767,
+                        "minimum": 0
+                    },
+                    "baths": {
+                        "type": "integer",
+                        "maximum": 32767,
+                        "minimum": 0
+                    },
+                    "size_sqft": {
+                        "type": "integer",
+                        "maximum": 2147483647,
+                        "minimum": 0
+                    },
+                    "lat": {
+                        "type": "string",
+                        "format": "decimal",
+                        "pattern": "^-?\\d{0,3}(?:\\.\\d{0,6})?$",
+                        "nullable": true
+                    },
+                    "lon": {
+                        "type": "string",
+                        "format": "decimal",
+                        "pattern": "^-?\\d{0,3}(?:\\.\\d{0,6})?$",
+                        "nullable": true
+                    },
+                    "cover_image": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "views_count": {
+                        "type": "integer",
+                        "maximum": 2147483647,
+                        "minimum": 0
+                    },
+                    "is_favourited": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "address",
+                    "cover_image",
+                    "created_at",
+                    "id",
+                    "is_favourited",
+                    "is_new",
+                    "price",
+                    "title"
+                ]
+            },
+            "PropertyType": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "slug": {
+                        "type": "string",
+                        "maxLength": 50,
+                        "pattern": "^[-a-zA-Z0-9_]+$"
+                    }
+                },
+                "required": [
+                    "name",
+                    "slug"
+                ]
+            },
             "PropertyTypeEnum": {
                 "enum": [
                     "house",
@@ -2362,6 +3561,86 @@
                 ],
                 "type": "string",
                 "description": "* `house` - House\n* `apartment` - Apartment\n* `villa` - Villa"
+            },
+            "PropertyVideo": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "video_file": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "uploaded_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "id",
+                    "uploaded_at",
+                    "video_file"
+                ]
+            },
+            "PropertyVideoUpload": {
+                "type": "object",
+                "properties": {
+                    "video_file": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "required": [
+                    "video_file"
+                ]
+            },
+            "QRBoard": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "qr_code_image": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true,
+                        "nullable": true
+                    },
+                    "scan_count": {
+                        "type": "integer",
+                        "readOnly": true
+                    },
+                    "active_property": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "assignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BoardAssignment"
+                        },
+                        "readOnly": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "active_property",
+                    "assignments",
+                    "created_at",
+                    "id",
+                    "qr_code_image",
+                    "scan_count"
+                ]
             },
             "ResetPassword": {
                 "type": "object",
@@ -2395,6 +3674,37 @@
                 ],
                 "type": "string",
                 "description": "* `buyer` - Buyer\n* `agent` - Agent\n* `admin` - Admin"
+            },
+            "Status858Enum": {
+                "enum": [
+                    "available",
+                    "under_offer",
+                    "sold"
+                ],
+                "type": "string",
+                "description": "* `available` - Available\n* `under_offer` - Under Offer\n* `sold` - Sold"
+            },
+            "SupportMessage": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            },
+            "SupportReply": {
+                "type": "object",
+                "properties": {
+                    "reply": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "reply"
+                ]
             },
             "TokenRefresh": {
                 "type": "object",

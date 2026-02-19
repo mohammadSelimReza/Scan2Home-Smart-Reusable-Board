@@ -13,6 +13,9 @@ from .serializers import (
     VerifyOTPSerializer, ResetPasswordSerializer, LoginSerializer
 )
 from .services import AuthService
+from apps.common.doc_examples import (
+    BUYER_REGISTER_REQUEST, AGENT_REGISTER_REQUEST, LOGIN_REQUEST, LOGIN_RESPONSE
+)
 
 User = get_user_model()
 
@@ -34,7 +37,12 @@ def get_tokens_for_user(user):
 class BuyerRegisterView(APIView):
     permission_classes = [AllowAny]
 
-    @extend_schema(request=BuyerRegisterSerializer, responses=OpenApiResponse(description="User registered successfully"), tags=['Auth'])
+    @extend_schema(
+        request=BuyerRegisterSerializer,
+        responses=OpenApiResponse(description="User registered successfully"),
+        examples=[BUYER_REGISTER_REQUEST],
+        tags=['Auth']
+    )
     def post(self, request):
         serializer = BuyerRegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -45,7 +53,12 @@ class BuyerRegisterView(APIView):
 class AgentRegisterView(APIView):
     permission_classes = [AllowAny]
 
-    @extend_schema(request=AgentRegisterSerializer, responses=OpenApiResponse(description="User registered successfully"), tags=['Auth'])
+    @extend_schema(
+        request=AgentRegisterSerializer,
+        responses=OpenApiResponse(description="User registered successfully"),
+        examples=[AGENT_REGISTER_REQUEST],
+        tags=['Auth']
+    )
     def post(self, request):
         serializer = AgentRegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -56,7 +69,12 @@ class AgentRegisterView(APIView):
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
-    @extend_schema(request=LoginSerializer, responses=OpenApiResponse(description="Login successful"), tags=['Auth'])
+    @extend_schema(
+        request=LoginSerializer,
+        responses=OpenApiResponse(description="Login successful"),
+        examples=[LOGIN_REQUEST, LOGIN_RESPONSE],
+        tags=['Auth']
+    )
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

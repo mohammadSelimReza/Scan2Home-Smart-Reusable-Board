@@ -9,12 +9,18 @@ from .models import Offer, CounterOffer
 from .serializers import OfferSerializer, CounterOfferSerializer, CounterOfferCreateSerializer
 from apps.accounts.permissions import IsAgent
 from apps.notifications.services import NotificationService
+from apps.common.doc_examples import OFFER_CREATE_REQUEST, COUNTER_OFFER_REQUEST
 
 
 class SubmitOfferView(APIView):
     permission_classes = [AllowAny]
 
-    @extend_schema(request=OfferSerializer, responses=OfferSerializer, tags=['Offers'])
+    @extend_schema(
+        request=OfferSerializer,
+        responses=OfferSerializer,
+        examples=[OFFER_CREATE_REQUEST],
+        tags=['Offers']
+    )
     def post(self, request):
         serializer = OfferSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
@@ -84,7 +90,12 @@ class AgentOfferActionView(APIView):
 class CounterOfferView(APIView):
     permission_classes = [IsAgent]
 
-    @extend_schema(request=CounterOfferCreateSerializer, responses=CounterOfferSerializer, tags=['Offers'])
+    @extend_schema(
+        request=CounterOfferCreateSerializer,
+        responses=CounterOfferSerializer,
+        examples=[COUNTER_OFFER_REQUEST],
+        tags=['Offers']
+    )
     def post(self, request, offer_id):
         offer = get_object_or_404(Offer, id=offer_id, property__agent=request.user)
         serializer = CounterOfferCreateSerializer(data=request.data)
