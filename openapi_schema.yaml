@@ -1,0 +1,1589 @@
+openapi: 3.0.3
+info:
+  title: Scan2Home API
+  version: 1.0.0
+  description: QR-driven Real Estate Platform
+paths:
+  /api/v1/admin/agents/:
+    get:
+      operationId: v1_admin_agents_retrieve
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/agents/{id}/ban/:
+    post:
+      operationId: v1_admin_agents_ban_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/agents/{id}/verify/:
+    post:
+      operationId: v1_admin_agents_verify_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/dashboard/:
+    get:
+      operationId: v1_admin_dashboard_retrieve
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/properties/:
+    get:
+      operationId: v1_admin_properties_retrieve
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/properties/{id}/{action}/:
+    post:
+      operationId: v1_admin_properties_create
+      parameters:
+      - in: path
+        name: action
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/settings/privacy/:
+    get:
+      operationId: v1_admin_settings_privacy_retrieve
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: v1_admin_settings_privacy_update
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/settings/property-types/:
+    get:
+      operationId: v1_admin_settings_property_types_retrieve
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: v1_admin_settings_property_types_create
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: v1_admin_settings_property_types_destroy
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/admin/settings/terms/:
+    get:
+      operationId: v1_admin_settings_terms_retrieve
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: v1_admin_settings_terms_update
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/support/:
+    get:
+      operationId: v1_admin_support_retrieve
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/support/{id}/reply/:
+    post:
+      operationId: v1_admin_support_reply_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin Settings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/users/:
+    get:
+      operationId: v1_admin_users_retrieve
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/users/{id}/:
+    get:
+      operationId: v1_admin_users_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: v1_admin_users_create
+      description: Ban / Unban user
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/admin/users/{id}/ban/:
+    get:
+      operationId: v1_admin_users_ban_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: v1_admin_users_ban_create
+      description: Ban / Unban user
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Admin
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/change-password/:
+    post:
+      operationId: v1_auth_change_password_create
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/delete-account/:
+    delete:
+      operationId: v1_auth_delete_account_destroy
+      tags:
+      - Auth
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/auth/forgot-password/:
+    post:
+      operationId: v1_auth_forgot_password_create
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/login/:
+    post:
+      operationId: v1_auth_login_create
+      tags:
+      - Auth
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/profile/:
+    get:
+      operationId: v1_auth_profile_retrieve
+      tags:
+      - Auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+          description: ''
+    patch:
+      operationId: v1_auth_profile_partial_update
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserProfileUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserProfileUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserProfileUpdate'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/register/agent/:
+    post:
+      operationId: v1_auth_register_agent_create
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRegister'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AgentRegister'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AgentRegister'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/register/buyer/:
+    post:
+      operationId: v1_auth_register_buyer_create
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyerRegister'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BuyerRegister'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BuyerRegister'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/reset-password/:
+    post:
+      operationId: v1_auth_reset_password_create
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/auth/token/refresh/:
+    post:
+      operationId: v1_auth_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/v1/auth/verify-otp/:
+    post:
+      operationId: v1_auth_verify_otp_create
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyOTP'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyOTP'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyOTP'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/boards/:
+    get:
+      operationId: v1_boards_retrieve
+      tags:
+      - QR Boards
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: v1_boards_create
+      tags:
+      - QR Boards
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/boards/{qr_id}/:
+    get:
+      operationId: v1_boards_retrieve_2
+      parameters:
+      - in: path
+        name: qr_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - QR Boards
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/boards/{qr_id}/download-qr/:
+    get:
+      operationId: v1_boards_download_qr_retrieve
+      parameters:
+      - in: path
+        name: qr_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - QR Boards
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/boards/{qr_id}/reassign/:
+    patch:
+      operationId: v1_boards_reassign_partial_update
+      parameters:
+      - in: path
+        name: qr_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - QR Boards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReassignBoard'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReassignBoard'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReassignBoard'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/bookings/:
+    post:
+      operationId: v1_bookings_create
+      tags:
+      - Bookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/bookings/{id}/{action}/:
+    post:
+      operationId: v1_bookings_create_2
+      parameters:
+      - in: path
+        name: action
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Bookings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/bookings/agent/:
+    get:
+      operationId: v1_bookings_agent_retrieve
+      tags:
+      - Bookings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/bookings/my/:
+    get:
+      operationId: v1_bookings_my_retrieve
+      tags:
+      - Bookings
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/chat/:
+    post:
+      operationId: v1_chat_create
+      tags:
+      - Chat
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/notifications/:
+    get:
+      operationId: v1_notifications_retrieve
+      tags:
+      - Notifications
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/notifications/{id}/read/:
+    post:
+      operationId: v1_notifications_read_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Notifications
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/notifications/settings/:
+    get:
+      operationId: v1_notifications_settings_retrieve
+      tags:
+      - Notifications
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: v1_notifications_settings_partial_update
+      tags:
+      - Notifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedNotificationSettings'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedNotificationSettings'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedNotificationSettings'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/offers/:
+    post:
+      operationId: v1_offers_create
+      tags:
+      - Offers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Offer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Offer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Offer'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/offers/{offer_id}/{action}/:
+    post:
+      operationId: v1_offers_create_2
+      parameters:
+      - in: path
+        name: action
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: offer_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Offers
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/offers/{offer_id}/counter/:
+    post:
+      operationId: v1_offers_counter_create
+      parameters:
+      - in: path
+        name: offer_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Offers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CounterOfferCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CounterOfferCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CounterOfferCreate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/offers/{offer_id}/history/:
+    get:
+      operationId: v1_offers_history_retrieve
+      parameters:
+      - in: path
+        name: offer_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Offers
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/offers/agent/:
+    get:
+      operationId: v1_offers_agent_retrieve
+      tags:
+      - Offers
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/:
+    get:
+      operationId: v1_properties_retrieve
+      tags:
+      - Properties
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/{id}/:
+    get:
+      operationId: v1_properties_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Properties
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: v1_properties_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyCreateUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyCreateUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyCreateUpdate'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: v1_properties_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Properties
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/properties/{id}/favourite/:
+    post:
+      operationId: v1_properties_favourite_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Favourites
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/{id}/images/:
+    post:
+      operationId: v1_properties_images_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyImageUpload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyImageUpload'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyImageUpload'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/{id}/similar/:
+    get:
+      operationId: v1_properties_similar_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Properties
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/{id}/video/:
+    post:
+      operationId: v1_properties_video_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - Properties
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/create/:
+    post:
+      operationId: v1_properties_create_create
+      tags:
+      - Properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyCreateUpdate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/favourites/:
+    get:
+      operationId: v1_properties_favourites_retrieve
+      tags:
+      - Favourites
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/my/:
+    get:
+      operationId: v1_properties_my_retrieve
+      description: Agent's own property list
+      tags:
+      - Properties
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/properties/support/:
+    post:
+      operationId: v1_properties_support_create
+      tags:
+      - Support
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/qr/{qr_id}/:
+    get:
+      operationId: v1_qr_retrieve
+      description: 'Public endpoint: scanned by buyer → redirect to property page
+        + log scan'
+      parameters:
+      - in: path
+        name: qr_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - QR Boards
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    AgentProfile:
+      type: object
+      properties:
+        brand_name:
+          type: string
+          maxLength: 255
+        logo:
+          type: string
+          format: uri
+          nullable: true
+        brand_color:
+          type: string
+          maxLength: 7
+        website:
+          type: string
+          format: uri
+          maxLength: 200
+        agent_photo:
+          type: string
+          format: uri
+          nullable: true
+        is_verified:
+          type: boolean
+          readOnly: true
+        rating:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,1})?$
+          readOnly: true
+        rating_count:
+          type: integer
+          readOnly: true
+      required:
+      - is_verified
+      - rating
+      - rating_count
+    AgentRegister:
+      type: object
+      properties:
+        full_name:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: string
+          maxLength: 20
+        password:
+          type: string
+          writeOnly: true
+          minLength: 8
+        brand_name:
+          type: string
+        website:
+          type: string
+          format: uri
+      required:
+      - email
+      - full_name
+      - password
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        property:
+          type: string
+          format: uuid
+        property_title:
+          type: string
+          readOnly: true
+        buyer_name:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date
+        time_slot:
+          type: string
+          format: time
+        message:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/BookingStatusEnum'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - buyer_name
+      - created_at
+      - date
+      - id
+      - property
+      - property_title
+      - status
+      - time_slot
+    BookingStatusEnum:
+      enum:
+      - pending
+      - confirmed
+      - cancelled
+      type: string
+      description: |-
+        * `pending` - Pending
+        * `confirmed` - Confirmed
+        * `cancelled` - Cancelled
+    BuyerRegister:
+      type: object
+      properties:
+        full_name:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: string
+          maxLength: 20
+        password:
+          type: string
+          writeOnly: true
+          minLength: 8
+      required:
+      - email
+      - full_name
+      - password
+    ChangePassword:
+      type: object
+      properties:
+        old_password:
+          type: string
+          writeOnly: true
+        new_password:
+          type: string
+          writeOnly: true
+          minLength: 8
+      required:
+      - new_password
+      - old_password
+    CounterOffer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        by_agent:
+          type: boolean
+          readOnly: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        message:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - amount
+      - by_agent
+      - created_at
+      - id
+    CounterOfferCreate:
+      type: object
+      properties:
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        message:
+          type: string
+      required:
+      - amount
+    ForgotPassword:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        property:
+          type: string
+          format: uuid
+        property_title:
+          type: string
+          readOnly: true
+        buyer_name:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: string
+          maxLength: 20
+        offer_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        message:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/OfferStatusEnum'
+          readOnly: true
+        is_lead:
+          type: boolean
+          readOnly: true
+        counter_offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CounterOffer'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - buyer_name
+      - counter_offers
+      - created_at
+      - email
+      - id
+      - is_lead
+      - offer_amount
+      - phone
+      - property
+      - property_title
+      - status
+      - updated_at
+    OfferStatusEnum:
+      enum:
+      - pending
+      - accepted
+      - rejected
+      type: string
+      description: |-
+        * `pending` - Pending
+        * `accepted` - Accepted
+        * `rejected` - Rejected
+    PatchedNotificationSettings:
+      type: object
+      properties:
+        push_enabled:
+          type: boolean
+        email_enabled:
+          type: boolean
+    PatchedPropertyCreateUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        property_type:
+          $ref: '#/components/schemas/PropertyTypeEnum'
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        address:
+          type: string
+          maxLength: 512
+        postcode:
+          type: string
+          maxLength: 20
+        lat:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+        lon:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+        status:
+          $ref: '#/components/schemas/PropertyCreateUpdateStatusEnum'
+        is_featured:
+          type: boolean
+        beds:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        baths:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        size_sqft:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        parking_slots:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        has_pool:
+          type: boolean
+        has_garage:
+          type: boolean
+        has_garden:
+          type: boolean
+        has_fireplace:
+          type: boolean
+        is_smart_home:
+          type: boolean
+        has_gym:
+          type: boolean
+        is_pet_friendly:
+          type: boolean
+    PatchedReassignBoard:
+      type: object
+      properties:
+        property_id:
+          type: string
+          format: uuid
+    PatchedUserProfileUpdate:
+      type: object
+      properties:
+        full_name:
+          type: string
+          maxLength: 255
+        phone:
+          type: string
+          maxLength: 20
+        profile_picture:
+          type: string
+          format: uri
+          nullable: true
+        is_2fa_enabled:
+          type: boolean
+        agent_profile:
+          $ref: '#/components/schemas/AgentProfile'
+    PropertyCreateUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        property_type:
+          $ref: '#/components/schemas/PropertyTypeEnum'
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        address:
+          type: string
+          maxLength: 512
+        postcode:
+          type: string
+          maxLength: 20
+        lat:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+        lon:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+        status:
+          $ref: '#/components/schemas/PropertyCreateUpdateStatusEnum'
+        is_featured:
+          type: boolean
+        beds:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        baths:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        size_sqft:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        parking_slots:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        has_pool:
+          type: boolean
+        has_garage:
+          type: boolean
+        has_garden:
+          type: boolean
+        has_fireplace:
+          type: boolean
+        is_smart_home:
+          type: boolean
+        has_gym:
+          type: boolean
+        is_pet_friendly:
+          type: boolean
+      required:
+      - address
+      - id
+      - price
+      - title
+    PropertyCreateUpdateStatusEnum:
+      enum:
+      - available
+      - under_offer
+      - sold
+      type: string
+      description: |-
+        * `available` - Available
+        * `under_offer` - Under Offer
+        * `sold` - Sold
+    PropertyImageUpload:
+      type: object
+      properties:
+        image:
+          type: string
+          format: uri
+        is_cover:
+          type: boolean
+        order:
+          type: integer
+          maximum: 32767
+          minimum: 0
+      required:
+      - image
+    PropertyTypeEnum:
+      enum:
+      - house
+      - apartment
+      - villa
+      type: string
+      description: |-
+        * `house` - House
+        * `apartment` - Apartment
+        * `villa` - Villa
+    ResetPassword:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        otp_code:
+          type: string
+          maxLength: 6
+          minLength: 6
+        new_password:
+          type: string
+          writeOnly: true
+          minLength: 8
+      required:
+      - email
+      - new_password
+      - otp_code
+    RoleEnum:
+      enum:
+      - buyer
+      - agent
+      - admin
+      type: string
+      description: |-
+        * `buyer` - Buyer
+        * `agent` - Agent
+        * `admin` - Admin
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+        full_name:
+          type: string
+          maxLength: 255
+        phone:
+          type: string
+          maxLength: 20
+        role:
+          allOf:
+          - $ref: '#/components/schemas/RoleEnum'
+          readOnly: true
+        profile_picture:
+          type: string
+          format: uri
+          nullable: true
+        is_2fa_enabled:
+          type: boolean
+        member_since:
+          type: string
+          format: date-time
+          readOnly: true
+        agent_profile:
+          allOf:
+          - $ref: '#/components/schemas/AgentProfile'
+          readOnly: true
+      required:
+      - agent_profile
+      - email
+      - full_name
+      - id
+      - member_since
+      - role
+    VerifyOTP:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        otp_code:
+          type: string
+          maxLength: 6
+          minLength: 6
+      required:
+      - email
+      - otp_code
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
