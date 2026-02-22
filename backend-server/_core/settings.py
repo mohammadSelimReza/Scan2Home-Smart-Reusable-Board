@@ -150,15 +150,13 @@ SPECTACULAR_SETTINGS = {
 
 # ─── CORS ────────────────────────────────────────────────────
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # restrict in production
-CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
-    'http://localhost:3000',  # React Dev
-    'http://localhost:8080',  # Flutter Web Dev
     'https://api.selimreza.dev',
+    'https://scan2home.selimreza.dev',
 ])
 
-# ─── CSRF ────────────────────────────────────────────────────
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'https://api.selimreza.dev',
+    'https://scan2home.selimreza.dev',
 ])
 
 # ─── CHANNELS (WebSocket) ────────────────────────────────────
