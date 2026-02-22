@@ -8,7 +8,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['api.selimreza.dev', '31.97.205.65', 'localhost', '127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['scan2home.selimreza.dev', 'api.selimreza.dev', '31.97.205.65', 'localhost', '127.0.0.1'])
 
 # ─── APPS ───────────────────────────────────────────────────
 DJANGO_APPS = [
