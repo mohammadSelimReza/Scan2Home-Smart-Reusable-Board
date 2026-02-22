@@ -78,7 +78,7 @@ class PropertyDetailSerializer(serializers.ModelSerializer):
 class PropertyCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
-        exclude = ('agent', 'views_count', 'is_approved', 'created_at', 'updated_at')
+        exclude = ('agent', 'views_count', 'qr_scanned_count', 'is_approved', 'created_at', 'updated_at')
 
     def create(self, validated_data):
         validated_data['agent'] = self.context['request'].user

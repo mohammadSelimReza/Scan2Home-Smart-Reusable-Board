@@ -8,7 +8,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['api.selimreza.dev', '31.97.205.65', 'localhost', '127.0.0.1'])
 
 # ─── APPS ───────────────────────────────────────────────────
 DJANGO_APPS = [
@@ -151,12 +151,15 @@ SPECTACULAR_SETTINGS = {
 # ─── CORS ────────────────────────────────────────────────────
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # restrict in production
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
-    'http://localhost:3000',
-    'http://localhost:8080',
+    'http://localhost:3000',  # React Dev
+    'http://localhost:8080',  # Flutter Web Dev
+    'https://api.selimreza.dev',
 ])
 
 # ─── CSRF ────────────────────────────────────────────────────
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
+    'https://api.selimreza.dev',
+])
 
 # ─── CHANNELS (WebSocket) ────────────────────────────────────
 CHANNEL_LAYERS = {
