@@ -24,6 +24,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
     - name: Build Backend Docker Image
-      run: |
-        docker build -t scan2home-backend -f backend-server/Dockerfile .
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./backend-server/Dockerfile
+        push: false
+        tags: scan2home-backend:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
