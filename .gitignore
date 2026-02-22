@@ -3,6 +3,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
+venv/
+.venv/
+ENV/
 
 # Django
 *.log
@@ -10,12 +13,12 @@ local_settings.py
 db.sqlite3
 media/
 staticfiles/
+static/
 
 # Environment
 .env
-.venv
-venv/
-ENV/
+.env.prod
+.env.local
 
 # IDE
 .idea/
@@ -27,6 +30,9 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Test scripts
-test_all_flows.sh
+# Project Logs
+logs/
+django-error.log
 
+# Docker
+.docker/

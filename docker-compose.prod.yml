@@ -1,0 +1,64 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: scan2home_db_prod
+    restart: always
+    env_file: .env.prod
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${DB_USER} -d $${DB_NAME}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: scan2home_redis_prod
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend-server
+    container_name: scan2home_backend_prod
+    restart: always
+    env_file: .env.prod
+    command: gunicorn _core.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+    ports:
+      - "8000:8000"
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ai-server:
+        condition: service_healthy
+
+  ai-server:
+    build: ./ai-server
+    container_name: scan2home_ai_prod
+    restart: always
+    env_file: .env.prod
+    # No ports mapping - Internal only
+    expose:
+      - "5000"
+    command: uvicorn main:app --host 0.0.0.0 --port 5000 --workers 2
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - redis
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

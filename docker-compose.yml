@@ -1,13 +1,16 @@
 services:
-  django:
-    build: .
-    container_name: scan2home_api
+  # ── Django Backend API ──────────────────────────────────────────
+  backend:
+    build: ./backend-server
+    container_name: scan2home_backend
     restart: unless-stopped
     env_file:
-      - .env
+      - ./backend-server/.env
     environment:
       - DB_HOST=db
+      - DB_PORT=5432
       - REDIS_URL=redis://redis:6379/0
+      - CHATBOT_SERVICE_URL=http://ai:8500/chat
     ports:
       - "8000:8000"
     volumes:
@@ -18,33 +21,58 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      ai:
+        condition: service_started
     command: >
       sh -c "python manage.py migrate &&
              python manage.py collectstatic --noinput &&
              gunicorn _core.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120"
 
+  # ── AI Chatbot Server (FastAPI + LangChain) ─────────────────────
+  ai:
+    build: ./ai-server
+    container_name: scan2home_ai
+    restart: unless-stopped
+    env_file:
+      - ./ai-server/.env
+    expose:
+      - "5000"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5000/health" ]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    # ── PostgreSQL ──────────────────────────────────────────────────
   db:
     image: postgres:16-alpine
     container_name: scan2home_db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: scan2home
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    # Remove direct port exposure
+    # ports:
+    #   - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d scan2home" ]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  # ── Redis ───────────────────────────────────────────────────────
   redis:
     image: redis:7-alpine
     container_name: scan2home_redis
     restart: unless-stopped
+    # Remove direct port exposure
+    # ports:
+    #   - "6380:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5

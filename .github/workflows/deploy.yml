@@ -1,0 +1,35 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /app/scan2home
+            git pull origin main
+            
+            # Setup environment files from secrets if they exist
+            echo "${{ secrets.BACKEND_ENV }}" > ./backend-server/.env.prod
+            echo "${{ secrets.AI_ENV }}" > ./ai-server/.env.prod
+            
+            # Build and restart services on the VPS
+            docker compose -f docker-compose.prod.yml up --build -d
+            
+            # Run migrations
+            docker compose -f docker-compose.prod.yml exec -T backend python manage.py migrate
+            
+            # Cleanup old images
+            docker image prune -f

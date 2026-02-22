@@ -1,0 +1,10 @@
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+# LangChain + OpenAI
+langchain-openai==0.1.23
+langchain-core==0.2.38
+
+# Environment
+python-dotenv==1.0.1
