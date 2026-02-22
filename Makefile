@@ -2,7 +2,7 @@
 DOCKER_COMPOSE = docker compose
 PROD_COMPOSE = docker compose -f docker-compose.prod.yml
 
-.PHONY: help up down build logs restart migrate makemigrations collectstatic schema dlogs tail-backend tail-ai clean prod-up prod-down prod-logs prod-restart prod-migrate prod-dlogs
+.PHONY: help up down build logs restart migrate makemigrations collectstatic schema dlogs tail-backend tail-ai clean prod-up prod-down prod-logs prod-restart prod-migrate prod-dlogs dlog
 
 help:
 	@echo "Dev Commands:"
@@ -39,6 +39,7 @@ prod-migrate:
 	$(PROD_COMPOSE) exec backend python manage.py migrate
 prod-dlogs:
 	$(PROD_COMPOSE) exec backend tail -f logs/requests.log
+dlog: prod-dlogs
 
 # ─── UTILITIES ────────────────────────────────────────────
 clean:

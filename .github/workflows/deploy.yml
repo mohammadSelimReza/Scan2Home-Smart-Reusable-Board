@@ -26,9 +26,9 @@ jobs:
             cd scan2home
             git pull origin main
             
-            # Setup environment files from secrets if they exist
-            echo "${{ secrets.BACKEND_ENV }}" > ./backend-server/.env.prod
-            echo "${{ secrets.AI_ENV }}" > ./ai-server/.env.prod
+            # Setup environment file from secrets
+            echo "${{ secrets.BACKEND_ENV }}" > .env.prod
+            echo "${{ secrets.AI_ENV }}" >> .env.prod
             
             # Build and restart services on the VPS
             docker compose -f docker-compose.prod.yml up --build -d
