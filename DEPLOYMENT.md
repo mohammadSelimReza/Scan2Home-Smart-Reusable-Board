@@ -48,14 +48,14 @@ Create a configuration at `/etc/nginx/sites-available/scan2home`:
 ```nginx
 server {
     listen 80;
-    server_name api.selimreza.dev;
+    server_name scan2home.selimreza.dev api.selimreza.dev;
 
     location /static/ {
-        alias /app/scan2home/backend-server/staticfiles/;
+        alias /app/scan2home/staticfiles/;
     }
 
     location /media/ {
-        alias /app/scan2home/backend-server/media/;
+        alias /app/scan2home/media/;
     }
 
     location / {
@@ -76,7 +76,7 @@ systemctl restart nginx
 
 ### 3.2 SSL with Certbot
 ```bash
-certbot --nginx -d api.selimreza.dev
+certbot --nginx -d scan2home.selimreza.dev -d api.selimreza.dev
 ```
 
 ---
