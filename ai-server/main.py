@@ -16,19 +16,34 @@ app = FastAPI(title="Scan2Home AI Server", version="1.0.0")
 # ── Default FAQ Context ──────────────────────────────────────────────────────
 DEFAULT_FAQ = """
 Q: What is Scan2Home?
-A: Scan2Home is a QR-driven real estate platform that connects property buyers with agents.
+A: Scan2Home is an automated real estate platform that uses AI-driven analytics and QR codes to streamline property inventory management and buyer-agent interactions.
+
+Q: How do the QR codes work?
+A: Each property is assigned a unique QR code. When a user scans the code, they are instantly directed to the property's digital profile where they can view details, photos, and book viewings.
+
+Q: What does the AI Analytics Module do?
+A: The AI module provides automated property analysis and intelligent inventory generation, helping agents extract deep insights from property data without manual entry.
 
 Q: How do I schedule a property viewing?
-A: You can request a viewing through the property details page by selecting a date and time slot.
+A: Users can request a viewing directly from the property listing page by selecting an available date and time. The agent will then receive a notification to confirm the booking.
 
-Q: How does the QR code work?
-A: Each property has a unique QR code. Scanning it with your phone takes you directly to the property listing.
+Q: Can I submit a formal offer through the app?
+A: Yes, the platform includes an offers module. Users can submit digital offers, and agents can manage them by accepting, rejecting, or sending a counter-offer.
 
-Q: Can I make an offer online?
-A: Yes, you can submit offers directly through the app. The agent will review and may accept, reject, or counter your offer.
+Q: Is my data secure?
+A: Yes. Scan2Home uses a hardened production setup where the AI service is isolated in a private Docker network, and all external traffic is secured via SSL/TLS encryption.
+
+Q: How do agents manage their inventory?
+A: Agents have access to a dedicated dashboard and management CLI that allows them to track property scans, update listings, and manage automated inventory reports.
+
+Q: What happens if I scan a QR code for a property that is no longer available?
+A: The platform will notify you of the property's updated status and suggest similar available listings in the same area.
+
+Q: Does the platform support real-time communication?
+A: Yes, Scan2Home features an integrated chat and notification system to ensure seamless communication between agents and prospective buyers.
 
 Q: How do I contact support?
-A: You can reach our support team via the in-app support feature or email support@scan2home.com.
+A: You can reach our support team via the in-app support feature or by emailing support@scan2home.com.
 """
 
 
