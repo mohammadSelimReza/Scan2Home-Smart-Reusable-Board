@@ -33,7 +33,7 @@ graph TD
 - **📸 Automated Inventory**: Smart property scanning and automated data extraction.
 - **🤖 AI Property Analytics**: Deep insights and analysis using our isolated FastAPI module.
 - **🛡 Enterprise Security**: Hardened production settings, rotating logs, and service isolation.
-- **🏗 CI/CD Ready**: Automated deployment pipeline via GitHub Actions.
+- **🏗 CI/CD Ready**: Automated deployment to `api.selimreza.dev` via GitHub Actions.
 - **📱 Responsive Management**: Admin dashboard for full control over properties, users, and reviews.
 
 ---
@@ -70,6 +70,8 @@ graph TD
    ```
 
 The API will be available at `http://localhost:8000/api/v1/` and Swagger docs at `http://localhost:8000/api/schema/swagger-ui/`.
+
+**Production API**: `https://api.selimreza.dev/api/v1/`
 
 ---
 

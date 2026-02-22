@@ -23,7 +23,9 @@ services:
       retries: 5
 
   backend:
-    build: ./backend-server
+    build:
+      context: .
+      dockerfile: ./backend-server/Dockerfile
     container_name: scan2home_backend_prod
     restart: always
     env_file: .env.prod
@@ -42,7 +44,9 @@ services:
         condition: service_healthy
 
   ai-server:
-    build: ./ai-server
+    build:
+      context: .
+      dockerfile: ./ai-server/Dockerfile
     container_name: scan2home_ai_prod
     restart: always
     env_file: .env.prod

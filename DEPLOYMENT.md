@@ -6,7 +6,7 @@ This guide covers the process of deploying the Scan2Home platform directly to a 
 
 ### 1.1 Update & Basic Hardening
 ```bash
-ssh root@your_vps_ip
+ssh root@31.97.205.65
 apt update && apt upgrade -y
 apt install -y ufw curl git nginx certbot python3-certbot-nginx
 ufw allow 'Nginx Full'
@@ -48,7 +48,7 @@ Create a configuration at `/etc/nginx/sites-available/scan2home`:
 ```nginx
 server {
     listen 80;
-    server_name yourdomain.com www.yourdomain.com;
+    server_name api.selimreza.dev;
 
     location /static/ {
         alias /app/scan2home/backend-server/staticfiles/;
@@ -76,7 +76,7 @@ systemctl restart nginx
 
 ### 3.2 SSL with Certbot
 ```bash
-certbot --nginx -d yourdomain.com -d www.yourdomain.com
+certbot --nginx -d api.selimreza.dev
 ```
 
 ---

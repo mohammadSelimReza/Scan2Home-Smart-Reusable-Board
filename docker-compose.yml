@@ -1,7 +1,9 @@
 services:
   # ── Django Backend API ──────────────────────────────────────────
   backend:
-    build: ./backend-server
+    build:
+      context: .
+      dockerfile: ./backend-server/Dockerfile
     container_name: scan2home_backend
     restart: unless-stopped
     env_file:
@@ -14,6 +16,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ./backend-server:/app
       - media_files:/app/media
       - static_files:/app/staticfiles
     depends_on:
@@ -30,7 +33,9 @@ services:
 
   # ── AI Chatbot Server (FastAPI + LangChain) ─────────────────────
   ai:
-    build: ./ai-server
+    build:
+      context: .
+      dockerfile: ./ai-server/Dockerfile
     container_name: scan2home_ai
     restart: unless-stopped
     env_file:
@@ -43,7 +48,8 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
-    # ── PostgreSQL ──────────────────────────────────────────────────
+
+  # ── PostgreSQL ──────────────────────────────────────────────────
   db:
     image: postgres:16-alpine
     container_name: scan2home_db
@@ -52,9 +58,6 @@ services:
       POSTGRES_DB: scan2home
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    # Remove direct port exposure
-    # ports:
-    #   - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -68,9 +71,6 @@ services:
     image: redis:7-alpine
     container_name: scan2home_redis
     restart: unless-stopped
-    # Remove direct port exposure
-    # ports:
-    #   - "6380:6379"
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s

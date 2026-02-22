@@ -23,6 +23,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Build Docker Image
+    - name: Build Backend Docker Image
       run: |
-        docker build -t scan2home-django .
+        docker build -t scan2home-backend -f backend-server/Dockerfile .

@@ -1,0 +1,43 @@
+# ─── CORE ─────────────────────────────────────────────────────
+Django==5.0.6
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
+requests==2.32.3
+django-environ==0.11.2
+django-cors-headers==4.4.0
+psycopg2-binary==2.9.9
+
+# ─── API DOCUMENTATION ────────────────────────────────────────
+drf-spectacular==0.27.2
+
+# ─── QR CODE & IMAGING ────────────────────────────────────────
+qrcode[pil]==7.4.2
+Pillow==10.4.0
+
+# ─── CHANNELS & ASYNC ─────────────────────────────────────────
+channels==4.1.0
+channels-redis==4.2.0
+daphne==4.1.2
+redis==5.0.8
+celery==5.4.0
+
+# ─── PRODUCTION SERVER & STATIC ───────────────────────────────
+gunicorn==22.0.0
+whitenoise==6.7.0
+
+# ─── AI & INTELLIGENT CHAT ────────────────────────────────────
+fastapi==0.115.0
+pydantic==2.8.2
+uvicorn[standard]==0.30.6
+langchain-openai==0.1.23
+langchain-core==0.2.38
+python-dotenv==1.0.1
+
+# ─── TOOLING & TESTING ────────────────────────────────────────
+black==24.8.0
+flake8==7.1.1
+isort==5.13.2
+pytest==8.3.2
+pytest-django==4.8.0
+factory-boy==3.3.1
+coverage==7.6.1
