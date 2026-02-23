@@ -36,3 +36,4 @@ django-error.log
 
 # Docker
 .docker/
+frontend
