@@ -154,7 +154,8 @@ class VerifyOTPView(APIView):
         serializer.is_valid(raise_exception=True)
         is_valid = AuthService.verify_otp(
             serializer.validated_data['email'],
-            serializer.validated_data['otp_code']
+            serializer.validated_data['otp_code'],
+            consume=False
         )
         if not is_valid:
             return Response({'error': 'Invalid or expired OTP.'}, status=status.HTTP_400_BAD_REQUEST)

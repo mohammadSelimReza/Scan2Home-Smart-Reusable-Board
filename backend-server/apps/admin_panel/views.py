@@ -1,4 +1,5 @@
 from rest_framework import status, serializers
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -331,7 +332,15 @@ class PublicStaticPageView(APIView):
 
 class PropertyTypeConfigView(APIView):
     permission_classes = [IsAdminUser]
-
+    
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAdminUser()]
+    
     @extend_schema(responses=PropertyTypeSerializer(many=True), tags=['Admin Settings'])
     def get(self, request):
         types = PropertyType2.objects.all()

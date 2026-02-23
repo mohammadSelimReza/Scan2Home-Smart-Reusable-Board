@@ -38,7 +38,7 @@ class AuthService:
         return code
 
     @staticmethod
-    def verify_otp(email: str, code: str) -> bool:
+    def verify_otp(email: str, code: str,consume: bool = True) -> bool:
         """Returns True if valid, marks as used."""
         otp = OTPVerification.objects.filter(
             email=email,
@@ -47,7 +47,8 @@ class AuthService:
             expires_at__gt=timezone.now(),
         ).first()
         if otp:
-            otp.is_used = True
-            otp.save()
+            if consume:
+                otp.is_used = True
+                otp.save()
             return True
         return False
