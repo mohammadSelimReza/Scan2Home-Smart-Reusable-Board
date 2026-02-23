@@ -153,11 +153,13 @@ CORS_ALLOW_ALL_ORIGINS = DEBUG  # restrict in production
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
     'http://localhost:3000',  # React Dev
     'http://localhost:8080',  # Flutter Web Dev
+    'http://localhost:5173',  # Vite Dev
     'https://api.selimreza.dev',
     'https://scan2home.selimreza.dev',
 ])
 
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
+    'http://localhost:5173',
     'https://api.selimreza.dev',
     'https://scan2home.selimreza.dev',
 ])
