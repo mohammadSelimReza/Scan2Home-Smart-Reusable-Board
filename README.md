@@ -71,7 +71,7 @@ graph TD
 
 The API will be available at `http://localhost:8000/api/v1/` and Swagger docs at `http://localhost:8000/api/schema/swagger-ui/`.
 
-**Production API**: `https://api.selimreza.dev/api/v1/`
+**Production API**: `https://scan2home.selimreza.dev/api/v1/`
 
 ---
 
