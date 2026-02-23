@@ -154,12 +154,14 @@ CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
     'http://localhost:3000',  # React Dev
     'http://localhost:8080',  # Flutter Web Dev
     'http://localhost:5173',  # Vite Dev
+    'http://10.10.13.18:5173', # Local Network Vite Dev
     'https://api.selimreza.dev',
     'https://scan2home.selimreza.dev',
 ])
 
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'http://localhost:5173',
+    'http://10.10.13.18:5173',
     'https://api.selimreza.dev',
     'https://scan2home.selimreza.dev',
 ])
