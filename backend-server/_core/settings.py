@@ -193,7 +193,7 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='Scan2Home <noreply@scan2
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = env('MEDIA_URL', default='/media/')
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ─── MISC ────────────────────────────────────────────────────
