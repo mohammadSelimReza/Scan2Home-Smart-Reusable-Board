@@ -78,7 +78,7 @@ graph TD
    make up
    ```
 
-The API will be available at `http://localhost:8000/api/v1/` and Swagger docs at `http://localhost:8000/api/schema/swagger-ui/`.
+The API will be available at `http://localhost:8000/api/v1/` and Swagger docs at `http://localhost:8000/api/docs/`.
 
 ---
 
@@ -87,9 +87,10 @@ The API will be available at `http://localhost:8000/api/v1/` and Swagger docs at
 | Environment | URL |
 |---|---|
 | **Production API** | [`https://scan2home.selimreza.dev/api/v1/`](https://scan2home.selimreza.dev/api/v1/) |
-| **Swagger UI** | [`https://scan2home.selimreza.dev/api/schema/swagger-ui/`](https://scan2home.selimreza.dev/api/schema/swagger-ui/) |
+| **Swagger UI** | [`https://scan2home.selimreza.dev/api/docs/`](https://scan2home.selimreza.dev/api/docs/) |
+| **ReDoc** | [`https://scan2home.selimreza.dev/api/redoc/`](https://scan2home.selimreza.dev/api/redoc/) |
 | **Local Dev API** | `http://localhost:8000/api/v1/` |
-| **Local Swagger** | `http://localhost:8000/api/schema/swagger-ui/` |
+| **Local Swagger** | `http://localhost:8000/api/docs/` |
 
 ---
 
