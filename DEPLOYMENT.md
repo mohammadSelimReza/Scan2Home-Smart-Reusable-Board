@@ -6,7 +6,7 @@ This guide covers the process of deploying the Scan2Home platform directly to a 
 
 ### 1.1 Update & Basic Hardening
 ```bash
-ssh root@31.97.205.65
+ssh root@<YOUR_VPS_IP>
 apt update && apt upgrade -y
 apt install -y ufw curl git nginx certbot python3-certbot-nginx
 ufw allow 'Nginx Full'

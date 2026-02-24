@@ -1,5 +1,14 @@
 # 🏠 Scan2Home
 
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.x-092E20?logo=django&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-AI_Module-009688?logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)
+![CI/CD](https://img.shields.io/github/actions/workflow/status/mohammadSelimReza/Scan2Home-Smart-Reusable-Board/deploy.yml?label=Deploy&logo=github)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 **Automated Real Estate Inventory & Property Management Platform**
 
 Scan2Home is a robust, multi-service platform designed to streamline property inventory management and real estate operations. By leveraging a specialized AI module alongside a powerful Django backend, it provides automated property analysis, inventory tracking, and seamless integration for real estate agencies.
@@ -54,8 +63,8 @@ graph TD
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/scan2home.git
-   cd scan2home
+   git clone https://github.com/mohammadSelimReza/Scan2Home-Smart-Reusable-Board.git
+   cd Scan2Home-Smart-Reusable-Board
    ```
 
 2. **Setup Environment**:
@@ -71,7 +80,16 @@ graph TD
 
 The API will be available at `http://localhost:8000/api/v1/` and Swagger docs at `http://localhost:8000/api/schema/swagger-ui/`.
 
-**Production API**: `https://scan2home.selimreza.dev/api/v1/`
+---
+
+## 📚 API Documentation
+
+| Environment | URL |
+|---|---|
+| **Production API** | [`https://scan2home.selimreza.dev/api/v1/`](https://scan2home.selimreza.dev/api/v1/) |
+| **Swagger UI** | [`https://scan2home.selimreza.dev/api/schema/swagger-ui/`](https://scan2home.selimreza.dev/api/schema/swagger-ui/) |
+| **Local Dev API** | `http://localhost:8000/api/v1/` |
+| **Local Swagger** | `http://localhost:8000/api/schema/swagger-ui/` |
 
 ---
 
@@ -91,4 +109,16 @@ This project includes a root `Makefile` for streamlined operations:
 
 ---
 
-*Designed and built for excellence in Real Estate Operations.*
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/mohammadSelimReza/Scan2Home-Smart-Reusable-Board/issues).
+
+---
+
+## 📜 License
+
+This project is [MIT](LICENSE) licensed.
+
+---
+
+<p align="center">Designed and built for excellence in Real Estate Operations.</p>
