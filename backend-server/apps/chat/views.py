@@ -22,7 +22,7 @@ class ChatbotView(APIView):
             response = requests.post(
                 settings.CHATBOT_SERVICE_URL,
                 json={'message': message, 'user_id': str(request.user.id)},
-                timeout=15,
+                timeout=35,
             )
             response.raise_for_status()
             return Response(response.json())

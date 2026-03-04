@@ -9,7 +9,7 @@ load_dotenv()
 
 # Initialize ChatOpenAI
 # You can pin a model version if needed, e.g., model="gpt-4o"
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-4o", temperature=0, request_timeout=30)
 
 def _convert_history_to_messages(chat_history: List[Dict[str, str]]) -> List[BaseMessage]:
     """Converts a list of dicts to LangChain message objects."""
