@@ -16,8 +16,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            mkdir -p /app
-            cd /app
+            mkdir -p ~/app
+            cd ~/app
             if [ ! -d "scan2home" ]; then
               git clone https://github.com/mohammadSelimReza/Scan2Home-Smart-Reusable-Board.git scan2home
             fi
