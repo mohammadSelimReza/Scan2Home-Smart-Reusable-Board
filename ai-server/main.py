@@ -68,7 +68,7 @@ def health_check():
 
 
 @app.post("/chat", response_model=ChatResponse)
-def chat(req: ChatRequest):
+async def chat(req: ChatRequest):
     """
     Unified chat endpoint.
     - mode="user"  → uses user_chatbot (FAQ-based support)
@@ -79,14 +79,14 @@ def chat(req: ChatRequest):
 
     try:
         if req.mode == "agent" and req.agent_profile:
-            reply = agent_chatbot(
+            reply = await agent_chatbot(
                 full_profile=req.agent_profile,
                 chat_history=history,
                 FAQ_context=faq,
                 message=req.message,
             )
         else:
-            reply = user_chatbot(
+            reply = await user_chatbot(
                 FAQ_context=faq,
                 chat_history=history,
                 message=req.message,

@@ -8,8 +8,9 @@ from langchain_core.messages import SystemMessage, HumanMessage, AIMessage, Base
 load_dotenv()
 
 # Initialize ChatOpenAI
-# You can pin a model version if needed, e.g., model="gpt-4o"
-llm = ChatOpenAI(model="gpt-4o", temperature=0, request_timeout=30)
+# Initialize ChatOpenAI per request to avoid thread deadlocks in FastAPI
+def get_llm():
+    return ChatOpenAI(model="gpt-4o", temperature=0, request_timeout=30)
 
 def _convert_history_to_messages(chat_history: List[Dict[str, str]]) -> List[BaseMessage]:
     """Converts a list of dicts to LangChain message objects."""
@@ -25,7 +26,7 @@ def _convert_history_to_messages(chat_history: List[Dict[str, str]]) -> List[Bas
             messages.append(SystemMessage(content=content))
     return messages
 
-def user_chatbot(FAQ_context: str, chat_history: List[Dict[str, str]], message: str = "") -> str:
+async def user_chatbot(FAQ_context: str, chat_history: List[Dict[str, str]], message: str = "") -> str:
     """
     Constructs the prompt and executes the chat using LangChain OpenAI.
     
@@ -54,10 +55,11 @@ If the answer is not in the FAQ, politely say you don't know and offer to connec
         messages.append(HumanMessage(content=message))
         
     # Execute the LLM call
-    response = llm.invoke(messages)
+    llm = get_llm()
+    response = await llm.ainvoke(messages)
     return response.content
 
-def agent_chatbot(full_profile: str, chat_history: List[Dict[str, str]], FAQ_context: str, message: str = "") -> str:
+async def agent_chatbot(full_profile: str, chat_history: List[Dict[str, str]], FAQ_context: str, message: str = "") -> str:
     """
     Constructs the prompt and executes the chat using LangChain OpenAI with a custom profile.
     
@@ -85,5 +87,6 @@ Use the following FAQ to answer the user's questions where relevant.
         messages.append(HumanMessage(content=message))
         
     # Execute the LLM call
-    response = llm.invoke(messages)
+    llm = get_llm()
+    response = await llm.ainvoke(messages)
     return response.content
