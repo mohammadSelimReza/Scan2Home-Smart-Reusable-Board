@@ -9,27 +9,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Copy files via SCP
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "."
-          target: "~/app/scan2home"
-          strip_components: 0
-
-      - name: Deploy and Restart via SSH
+      - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/app/scan2home
+            mkdir -p /app
+            cd /app
+            if [ ! -d "scan2home" ]; then
+              git clone https://github.com/mohammadSelimReza/Scan2Home-Smart-Reusable-Board.git scan2home
+            fi
+            cd scan2home
+            git pull origin main
             
             # Setup environment file from secrets
             echo "${{ secrets.BACKEND_ENV }}" > .env.prod
