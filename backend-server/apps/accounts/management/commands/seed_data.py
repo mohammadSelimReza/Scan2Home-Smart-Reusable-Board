@@ -117,8 +117,8 @@ class Command(BaseCommand):
                 Offer.objects.create(
                     property=prop,
                     buyer_name=buyer.full_name,
-                    buyer_email=buyer.email,
-                    buyer_phone=buyer.phone,
+                    email=buyer.email,
+                    phone=buyer.phone,
                     offer_amount=prop.price * Decimal(random.uniform(0.9, 1.1)),
                     message=fake.text(max_nb_chars=100),
                     status=random.choice(['pending', 'accepted', 'rejected']),
@@ -130,8 +130,8 @@ class Command(BaseCommand):
                 Booking.objects.create(
                     property=prop,
                     buyer=buyer,
-                    booking_date=timezone.now().date() + timezone.timedelta(days=random.randint(1, 14)),
-                    booking_time=timezone.now().time(),
+                    date=timezone.now().date() + timezone.timedelta(days=random.randint(1, 14)),
+                    time_slot=timezone.now().time(),
                     message=fake.text(max_nb_chars=100),
                     status=random.choice(['pending', 'confirmed', 'cancelled']),
                 )
