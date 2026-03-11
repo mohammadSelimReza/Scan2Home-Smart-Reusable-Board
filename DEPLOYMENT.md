@@ -100,15 +100,16 @@ certbot --nginx -d scan2home.co.uk -d www.scan2home.co.uk -d api.scan2home.co.uk
 
 ---
 
-## 4. Fix Docker Volume Permissions for Nginx
+## 4. Fix Media Folder Permissions for Nginx
 
-After your first GitHub Actions deployment (when the Docker volumes are created), you must fix the permissions so Nginx can read the media files:
+After your first GitHub Actions deployment (when the directories are created), you must fix the permissions so Nginx can read the media and static files:
 
 ```bash
-chmod 755 /var/lib/docker/volumes/scan2home_media_files/
-chmod 755 /var/lib/docker/volumes/scan2home_static_files/
-chmod -R 755 /var/lib/docker/volumes/scan2home_media_files/_data/
-chmod -R 755 /var/lib/docker/volumes/scan2home_static_files/_data/
+chmod 755 /root/app/scan2home/
+chmod 755 /root/app/scan2home/media/
+chmod 755 /root/app/scan2home/staticfiles/
+chmod -R 755 /root/app/scan2home/media/
+chmod -R 755 /root/app/scan2home/staticfiles/
 ```
 
 ---
