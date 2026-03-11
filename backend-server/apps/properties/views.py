@@ -16,6 +16,7 @@ from .serializers import (
 )
 from apps.accounts.permissions import IsAgent
 from apps.common.doc_examples import PROPERTY_CREATE_REQUEST, PROPERTY_RESPONSE
+from apps.notifications.services import NotificationService
 
 
 class PropertyListView(APIView):
@@ -145,6 +146,15 @@ class PropertyCreateView(APIView):
         serializer = PropertyCreateUpdateSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         property_ = serializer.save()
+
+        # Track property creation
+        NotificationService.create(
+            user=request.user,
+            title=property_.title,
+            body=f'You listed a new property: "{property_.title}".',
+            notification_type='property',
+        )
+
         return Response(PropertyDetailSerializer(property_, context={'request': request}).data,
                         status=status.HTTP_201_CREATED)
 
@@ -163,6 +173,16 @@ class PropertyDetailView(APIView):
         prop = self.get_object(pk)
         # Increment views
         Property.objects.filter(pk=pk).update(views_count=prop.views_count + 1)
+
+        # Track property visit (notify the agent)
+        if request.user.is_authenticated and request.user != prop.agent:
+            NotificationService.create(
+                user=prop.agent,
+                title=prop.title,
+                body=f'Your property "{prop.title}" was visited by a user.',
+                notification_type='property',
+            )
+
         serializer = PropertyDetailSerializer(prop, context={'request': request})
         return Response(serializer.data)
 
@@ -174,6 +194,15 @@ class PropertyDetailView(APIView):
         serializer = PropertyCreateUpdateSerializer(prop, data=request.data, partial=True, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
+        # Track property update
+        NotificationService.create(
+            user=request.user,
+            title=prop.title,
+            body=f'You updated property: "{prop.title}".',
+            notification_type='property',
+        )
+
         return Response(PropertyDetailSerializer(prop, context={'request': request}).data)
 
     @extend_schema(responses=OpenApiResponse(description="Property deleted"), tags=['Properties'])
@@ -294,23 +323,24 @@ class AgentDashboardView(APIView):
         )
 
         from apps.offers.models import Offer
+        from apps.notifications.models import Notification
+
         total_offers = Offer.objects.filter(property__agent=agent).count()
 
-        # Recent activity from notifications
-        from apps.notifications.models import Notification
-        recent_notifications = Notification.objects.filter(
+        # Recent activity from notifications (covers all: property, offer, booking, qr_scan)
+        notifications = Notification.objects.filter(
             user=agent
         ).order_by('-created_at')[:10]
 
-        recent_activity = []
-        for notif in recent_notifications:
-            recent_activity.append({
-                'title': notif.title,
+        recent_activity = [
+            {
+                'property_name': notif.title,
                 'activity': notif.body,
                 'type': notif.notification_type,
                 'time': timesince(notif.created_at, timezone.now()) + ' ago',
-                'is_read': notif.is_read,
-            })
+            }
+            for notif in notifications
+        ]
 
         return Response({
             'total_property_listing': agent_properties.count(),

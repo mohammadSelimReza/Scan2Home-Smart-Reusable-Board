@@ -5,9 +5,17 @@ from drf_spectacular.utils import extend_schema_field
 
 
 class PropertyImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = PropertyImage
         fields = ('id', 'image', 'is_cover', 'order')
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
+        return None
 
 
 class PropertyVideoSerializer(serializers.ModelSerializer):

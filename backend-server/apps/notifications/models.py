@@ -7,6 +7,7 @@ class NotificationType(models.TextChoices):
     QR_SCAN = 'qr_scan', 'QR Scan'
     OFFER = 'offer', 'Offer'
     BOOKING = 'booking', 'Booking'
+    PROPERTY = 'property', 'Property'
     SYSTEM = 'system', 'System'
 
 
