@@ -8,7 +8,10 @@ from django.utils import timezone
 from django.utils.timesince import timesince
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse, OpenApiTypes
 
-from .models import Property, PropertyImage, PropertyVideo, PropertyFavourite, SupportMessage
+from .models import (
+    Property, PropertyImage, PropertyVideo, PropertyFavourite, 
+    SupportMessage, PropertyType, PropertyType2
+)
 from .serializers import (
     PropertyListSerializer, PropertyDetailSerializer,
     PropertyCreateUpdateSerializer, PropertyImageUploadSerializer,
@@ -349,3 +352,26 @@ class AgentDashboardView(APIView):
             'total_qr_scanned': aggregates['total_qr_scanned'] or 0,
             'recent_activity': recent_activity,
         })
+
+
+class PropertyTypeListView(APIView):
+    """List of available property types for filtering."""
+    permission_classes = [AllowAny]
+
+    @extend_schema(
+        responses=OpenApiResponse(description="List of property type strings"),
+        tags=['Properties']
+    )
+    def get(self, request):
+        # 1. Start with hardcoded choices from PropertyType enum
+        types = set(choice.value for choice in PropertyType)
+
+        # 2. Add any types from PropertyType2 (admin-configurable)
+        custom_types = PropertyType2.objects.values_list('slug', flat=True)
+        types.update(custom_types)
+
+        # 3. Add any existing types from Property model just in case some exist that aren't in the above
+        existing_types = Property.objects.values_list('property_type', flat=True).distinct()
+        types.update(existing_types)
+
+        return Response(sorted(list(types)))

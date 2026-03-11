@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.PropertyListView.as_view(), name='user-property-list'),
+    path('types/', views.PropertyTypeListView.as_view(), name='property-types'),
     path('<uuid:pk>/', views.PropertyDetailView.as_view(), name='user-property-detail'),
     path('<uuid:pk>/favourite/', views.FavouriteToggleView.as_view(), name='user-property-favourite'),
     path('favourites/', views.FavouriteListView.as_view(), name='user-favourite-list'),
