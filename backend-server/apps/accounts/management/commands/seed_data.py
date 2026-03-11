@@ -28,8 +28,7 @@ class Command(BaseCommand):
             User.objects.create_superuser(
                 email=admin_email,
                 password=admin_pass,
-                first_name="Super",
-                last_name="Admin",
+                full_name="Super Admin",
             )
             self.stdout.write(self.style.SUCCESS(f"Created Admin: {admin_email} / {admin_pass}"))
         else:
@@ -45,10 +44,9 @@ class Command(BaseCommand):
             user, created = User.objects.get_or_create(
                 email=email,
                 defaults={
-                    'first_name': fake.first_name(),
-                    'last_name': fake.last_name(),
-                    'phone_number': fake.phone_number()[:15],
-                    'user_type': User.UserType.USER,
+                    'full_name': fake.name(),
+                    'phone': fake.phone_number()[:15],
+                    'role': User.Role.BUYER,
                 }
             )
             if created:
@@ -64,10 +62,9 @@ class Command(BaseCommand):
             agent, created = User.objects.get_or_create(
                 email=email,
                 defaults={
-                    'first_name': fake.first_name(),
-                    'last_name': fake.last_name(),
-                    'phone_number': fake.phone_number()[:15],
-                    'user_type': User.UserType.AGENT,
+                    'full_name': fake.name(),
+                    'phone': fake.phone_number()[:15],
+                    'role': User.Role.AGENT,
                 }
             )
             if created:
@@ -77,12 +74,11 @@ class Command(BaseCommand):
             AgentProfile.objects.get_or_create(
                 user=agent,
                 defaults={
-                    'agency_name': fake.company(),
-                    'bio': fake.text(max_nb_chars=200),
-                    'license_number': fake.bothify(text='LIC-########'),
-                    'facebook_url': fake.url(),
-                    'instagram_url': fake.url(),
-                    'linkedin_url': fake.url(),
+                    'brand_name': fake.company(),
+                    'website': fake.url(),
+                    'is_verified': True,
+                    'rating': random.uniform(3.5, 5.0),
+                    'rating_count': random.randint(1, 50),
                 }
             )
             agents.append(agent)
@@ -123,9 +119,9 @@ class Command(BaseCommand):
                 buyer = random.choice(users)
                 Offer.objects.create(
                     property=prop,
-                    buyer_name=buyer.get_full_name(),
+                    buyer_name=buyer.full_name,
                     buyer_email=buyer.email,
-                    buyer_phone=buyer.phone_number,
+                    buyer_phone=buyer.phone,
                     offer_amount=prop.price * Decimal(random.uniform(0.9, 1.1)),
                     message=fake.text(max_nb_chars=100),
                     status=random.choice(['pending', 'accepted', 'rejected']),
