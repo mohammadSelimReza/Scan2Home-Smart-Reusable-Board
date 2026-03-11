@@ -9,7 +9,7 @@ from apps.accounts.models import AgentProfile
 from apps.properties.models import Property, PropertyImage
 from apps.offers.models import Offer
 from apps.bookings.models import Booking
-from apps.qr_boards.models import QRBoard
+from apps.qr_boards.models import QRBoard, BoardAssignment
 from apps.notifications.models import Notification, NotificationType
 
 User = get_user_model()
@@ -138,12 +138,15 @@ class Command(BaseCommand):
                 
             # Random 0-1 QR boards per property
             if random.choice([True, False]):
-                QRBoard.objects.create(
-                    property=prop,
+                board = QRBoard.objects.create(
                     agent=prop.agent,
-                    board_id=fake.uuid4()[:8],
-                    qr_code_url=fake.url(),
-                    status='active',
+                    scan_count=random.randint(0, 50)
+                )
+                board.generate_qr_code()
+                BoardAssignment.objects.create(
+                    board=board,
+                    property=prop,
+                    is_active=True
                 )
                 
         self.stdout.write(self.style.SUCCESS("Created Offers, Bookings, and QR Boards."))
