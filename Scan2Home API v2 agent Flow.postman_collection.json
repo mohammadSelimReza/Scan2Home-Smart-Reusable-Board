@@ -1,0 +1,1168 @@
+{
+  "info": {
+    "_postman_id": "9a8545b9-82fc-4b3c-a80f-002b9c88c640",
+    "name": "Scan2Home API v2 agent Flow",
+    "description": "Professional organized collection with Scoped URLs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47026984",
+    "_collection_link": "https://go.postman.co/collection/47026984-9a8545b9-82fc-4b3c-a80f-002b9c88c640?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Agent",
+      "item": [
+        {
+          "name": "Sub Folder 1: Login",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Access Token is captured\", function () {",
+                      "    var jsonResponse = pm.response.json();",
+                      "    var accessToken = jsonResponse.access;",
+                      "    var refreshToken = jsonResponse.refresh;",
+                      "    ",
+                      "    console.log(\"Access Token:\", accessToken);",
+                      "    console.log(\"Refresh Token:\",refreshToken);",
+                      "    if (accessToken) {",
+                      "        pm.collectionVariables.set(\"access_token\", accessToken);",
+                      "    } else {",
+                      "        console.log(\"Access token not found in response.\");",
+                      "    }",
+                      "    if (refreshToken){",
+                      "        pm.collectionVariables.set(\"refresh_token\",refreshToken);",
+                      "    }",
+                      "    else{",
+                      "        console.log(\"Refresh Token set failed\");",
+                      "    }",
+                      "",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"srreza1999@gmail.com\",\n  \"password\": \"selim.reza.uits@gmail.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/login/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "login",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Registration",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Selim Reza\",\n  \"email\": \"srreza1999@gmail.com\",\n  \"phone\": \"01770821121\",\n  \"password\": \"selim.reza.uits@gmail.com\",\n  \"brand_name\": \"selim.reza.uits@gmail.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/register/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "register",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Refresh Token",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refresh\": \"{{refresh_token}}\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/token/refresh/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "token",
+                    "refresh",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 2: Forget Password",
+          "item": [
+            {
+              "name": "Send OTP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"srreza1999@gmail.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/forgot-password/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "forgot-password",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "OTP Verify",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"srreza1999@gmail.com\",\n  \"otp_code\": \"123456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/verify-otp/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "verify-otp",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Password Reset",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"srreza1999@gmail.com\",\n  \"otp_code\": \"123456\",\n  \"new_password\": \"newSecurePass123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/reset-password/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "reset-password",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 3: Home Screen",
+          "item": [
+            {
+              "name": "Agent Dashboard Overview",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/dashboard/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    "dashboard",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 4: All Property",
+          "item": [
+            {
+              "name": "All Property (Global)",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user/properties/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "properties",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "My Property List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 5: Add Property",
+          "item": [
+            {
+              "name": "Add Property",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Modern Villa in London\",\n  \"description\": \"A stunning property with 4 bedrooms\",\n  \"property_type\": \"villa\",\n  \"price\": \"450000\",\n  \"address\": \"123 Baker Street, London\",\n  \"postcode\": \"NW1 6XE\",\n  \"beds\": 4,\n  \"baths\": 3,\n  \"size_sqft\": 2500,\n  \"parking_slots\": 2,\n  \"has_pool\": false,\n  \"has_garden\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/create/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    "create",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Add Image",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "src": ""
+                    },
+                    {
+                      "key": "is_cover",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/{{property_id}}/images/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    "{{property_id}}",
+                    "images",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Add Video",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "video_file",
+                      "type": "file",
+                      "src": ""
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/{{property_id}}/video/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    "{{property_id}}",
+                    "video",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 6: Offers and Leads",
+          "item": [
+            {
+              "name": "All Offers",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/offers/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "offers",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Offer History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/offers/{{offer_id}}/history/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "offers",
+                    "{{offer_id}}",
+                    "history",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Counter Offer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"110000\",\n  \"message\": \"We can negotiate further\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/offers/{{offer_id}}/counter/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "offers",
+                    "{{offer_id}}",
+                    "counter",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Offer Accept",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/offers/{{offer_id}}/accept/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "offers",
+                    "{{offer_id}}",
+                    "accept",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Offer Reject",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/offers/{{offer_id}}/reject/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "offers",
+                    "{{offer_id}}",
+                    "reject",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Mark as Lead",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/offers/{{offer_id}}/lead/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "offers",
+                    "{{offer_id}}",
+                    "lead",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 7: My Properties",
+          "item": [
+            {
+              "name": "My Property List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Property Detail",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/{{property_id}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    "{{property_id}}",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Edit Property",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Updated Villa Title\",\n  \"price\": \"475000\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/{{property_id}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    "{{property_id}}",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Property",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/properties/{{property_id}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "properties",
+                    "{{property_id}}",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 8: Agency Profile",
+          "item": [
+            {
+              "name": "Profile Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/profile/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "profile",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Profile Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Selim Reza Updated\",\n  \"phone\": \"01770821122\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/profile/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "profile",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Password Change",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"old_password\": \"currentPassword123\",\n  \"new_password\": \"newSecurePass456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/change-password/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "change-password",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Account",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/auth/delete-account/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "auth",
+                    "delete-account",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 9: Chat Screen",
+          "item": [
+            {
+              "name": "Chat with AI",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"tell me all faq\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/user/chat/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "chat",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 10: Notification API",
+          "item": [
+            {
+              "name": "List Notifications",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/notifications/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "notifications",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Mark as Read",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/notifications/{{notification_id}}/read/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "notifications",
+                    "{{notification_id}}",
+                    "read",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Notification Settings Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/notifications/settings/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "notifications",
+                    "settings",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Notification Settings Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"push_enabled\": true,\n  \"email_enabled\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/notifications/settings/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "notifications",
+                    "settings",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Sub Folder 11: Board Management",
+          "item": [
+            {
+              "name": "List Boards",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/boards/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "boards",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Board",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/boards/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "boards",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Board Detail",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/boards/{{board_id}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "boards",
+                    "{{board_id}}",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Reassign Board",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"property_id\": \"{{property_id}}\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/boards/{{board_id}}/reassign/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "boards",
+                    "{{board_id}}",
+                    "reassign",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Download QR",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/boards/{{board_id}}/download-qr/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "boards",
+                    "{{board_id}}",
+                    "download-qr",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://scan2home.selimreza.dev/api/v1"
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    },
+    {
+      "key": "refresh_token",
+      "value": ""
+    },
+    {
+      "key": "property_id",
+      "value": ""
+    },
+    {
+      "key": "offer_id",
+      "value": ""
+    },
+    {
+      "key": "board_id",
+      "value": ""
+    },
+    {
+      "key": "notification_id",
+      "value": ""
+    }
+  ]
+}

@@ -2,8 +2,10 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from django.utils.timesince import timesince
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse, OpenApiTypes
 
 from .models import Property, PropertyImage, PropertyVideo, PropertyFavourite, SupportMessage
@@ -271,3 +273,49 @@ class UserSupportMessageView(APIView):
         
         SupportMessage.objects.create(user=request.user, message=serializer.validated_data['message'])
         return Response({'message': 'Support request sent.'}, status=status.HTTP_201_CREATED)
+
+
+class AgentDashboardView(APIView):
+    """Agent dashboard overview with key stats and recent activity."""
+    permission_classes = [IsAgent]
+
+    @extend_schema(
+        responses=OpenApiResponse(description="Agent dashboard overview"),
+        tags=['Properties']
+    )
+    def get(self, request):
+        agent = request.user
+        agent_properties = Property.objects.filter(agent=agent)
+
+        # Aggregate stats
+        aggregates = agent_properties.aggregate(
+            total_views=Sum('views_count'),
+            total_qr_scanned=Sum('qr_scanned_count'),
+        )
+
+        from apps.offers.models import Offer
+        total_offers = Offer.objects.filter(property__agent=agent).count()
+
+        # Recent activity from notifications
+        from apps.notifications.models import Notification
+        recent_notifications = Notification.objects.filter(
+            user=agent
+        ).order_by('-created_at')[:10]
+
+        recent_activity = []
+        for notif in recent_notifications:
+            recent_activity.append({
+                'title': notif.title,
+                'activity': notif.body,
+                'type': notif.notification_type,
+                'time': timesince(notif.created_at, timezone.now()) + ' ago',
+                'is_read': notif.is_read,
+            })
+
+        return Response({
+            'total_property_listing': agent_properties.count(),
+            'total_property_views': aggregates['total_views'] or 0,
+            'total_offers_received': total_offers,
+            'total_qr_scanned': aggregates['total_qr_scanned'] or 0,
+            'recent_activity': recent_activity,
+        })
