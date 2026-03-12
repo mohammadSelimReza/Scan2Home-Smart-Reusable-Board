@@ -104,6 +104,23 @@ class CounterOfferView(APIView):
         return Response(CounterOfferSerializer(counter).data, status=status.HTTP_201_CREATED)
 
 
+class AgentLeadListView(APIView):
+    permission_classes = [IsAgent]
+
+    @extend_schema(
+        tags=['Offers'],
+        responses=OfferSerializer(many=True)
+    )
+    def get(self, request):
+        qs = Offer.objects.filter(
+            property__agent=request.user,
+            is_lead=True
+        ).select_related('property').prefetch_related('counter_offers')
+
+        serializer = OfferSerializer(qs, many=True, context={'request': request})
+        return Response({'count': qs.count(), 'results': serializer.data})
+
+
 class OfferHistoryView(APIView):
     permission_classes = [IsAgent]
 
