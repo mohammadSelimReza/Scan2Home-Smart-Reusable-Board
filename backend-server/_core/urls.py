@@ -34,6 +34,7 @@ urlpatterns = [
 
     # ── Neutral / Public Endpoints ──────────────────────────────────
     path('api/v1/qr/', include('apps.qr_boards.redirect_urls')),
+    path('scan/', include('apps.qr_boards.redirect_urls')),
 
     # API Docs
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
