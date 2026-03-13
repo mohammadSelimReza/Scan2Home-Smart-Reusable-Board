@@ -8,7 +8,12 @@ environ.Env.read_env(BASE_DIR / '.env')
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['scan2home.co.uk', 'api.scan2home.co.uk', 'scan2home.selimreza.dev', 'api.selimreza.dev', '31.97.205.65', 'localhost', '127.0.0.1','10.10.13.18'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
+    'scan2home.co.uk', 'www.scan2home.co.uk', 'api.scan2home.co.uk',
+    'app.scan2home.co.uk', 'admwin.scan2home.co.uk',
+    'scan2home.selimreza.dev', 'api.selimreza.dev',
+    '31.97.205.65', '187.77.179.167', 'localhost', '127.0.0.1', '10.10.13.18',
+])
 
 # ─── APPS ───────────────────────────────────────────────────
 DJANGO_APPS = [
@@ -117,6 +122,9 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
