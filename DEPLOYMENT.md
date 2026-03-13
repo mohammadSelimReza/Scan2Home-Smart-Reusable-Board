@@ -64,8 +64,8 @@ server {
     listen 80;
     server_name scan2home.co.uk www.scan2home.co.uk api.scan2home.co.uk admwin.scan2home.co.uk app.scan2home.co.uk;
 
-    # Allow large uploads (properties images & videos)
-    client_max_body_size 1M;
+    # Allow large uploads (properties images & videos) up to 100MB
+    client_max_body_size 100M;
 
     location /static/ {
         alias /root/app/scan2home/staticfiles/;
