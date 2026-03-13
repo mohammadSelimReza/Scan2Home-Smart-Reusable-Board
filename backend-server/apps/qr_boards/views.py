@@ -116,8 +116,7 @@ class QRScanRedirectView(APIView):
                 logger.error(f"Notification error in QRScanRedirectView: {str(e)}")
 
             # Return redirect URL
-            from django.conf import settings
-            redirect_url = f"{settings.FRONTEND_URL}/properties/{assignment.property.id}/"
+            redirect_url = f"https://api.scan2home.co.uk/api/v1/user/properties/{assignment.property.id}/"
             return Response({'redirect_url': redirect_url, 'property_id': str(assignment.property.id)})
         except Exception as e:
             logger.error(f"Critical error in QRScanRedirectView: {str(e)}")
