@@ -8,6 +8,7 @@ from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiTypes
 from .models import QRBoard, BoardAssignment
 from .serializers import QRBoardSerializer, ReassignBoardSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from apps.accounts.permissions import IsAgent
 from apps.properties.models import Property
 from apps.notifications.services import NotificationService
 from apps.common.doc_examples import REASSIGN_BOARD_REQUEST
