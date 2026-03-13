@@ -70,6 +70,7 @@ class PropertyDetailSerializer(serializers.ModelSerializer):
     agent_id = serializers.UUIDField(source='agent.id', read_only=True)
     is_new = serializers.BooleanField(read_only=True)
     is_favourited = serializers.SerializerMethodField()
+    assigned_qr_board = serializers.SerializerMethodField()
 
     class Meta:
         model = Property
@@ -81,6 +82,22 @@ class PropertyDetailSerializer(serializers.ModelSerializer):
         if request and request.user.is_authenticated:
             return obj.favourited_by.filter(user=request.user).exists()
         return False
+
+    @extend_schema_field(serializers.DictField(allow_null=True))
+    def get_assigned_qr_board(self, obj):
+        assignment = obj.board_assignments.filter(is_active=True).select_related('board').first()
+        if assignment and assignment.board:
+            board = assignment.board
+            request = self.context.get('request')
+            qr_image_url = None
+            if board.qr_code_image:
+                qr_image_url = request.build_absolute_uri(board.qr_code_image.url) if request else board.qr_code_image.url
+            return {
+                'id': str(board.id),
+                'qr_code_image': qr_image_url,
+                'scan_count': board.scan_count,
+            }
+        return None
 
 
 class PropertyCreateUpdateSerializer(serializers.ModelSerializer):
