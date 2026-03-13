@@ -7,7 +7,7 @@ from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiTypes
 
 from .models import QRBoard, BoardAssignment
 from .serializers import QRBoardSerializer, ReassignBoardSerializer
-from apps.accounts.permissions import IsAgent
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from apps.properties.models import Property
 from apps.notifications.services import NotificationService
 from apps.common.doc_examples import REASSIGN_BOARD_REQUEST
@@ -81,7 +81,7 @@ class QRBoardDownloadView(APIView):
 
 class QRScanRedirectView(APIView):
     """Public endpoint: scanned by buyer → redirect to property page + log scan"""
-    permission_classes = []
+    permission_classes = [AllowAny]
     authentication_classes = []
 
     @extend_schema(responses=OpenApiResponse(description="Redirect URL", response={'type': 'object', 'properties': {'redirect_url': {'type': 'string'}, 'property_id': {'type': 'string'}}}), tags=['QR Boards'])

@@ -26,7 +26,7 @@ class QRBoard(models.Model):
 
     def generate_qr_code(self):
         """Generate QR code image pointing to the QR redirect endpoint."""
-        qr_url = f"{settings.FRONTEND_URL}/scan/{self.id}/"
+        qr_url = f"https://api.scan2home.co.uk/scan/{self.id}/"
         qr = qrcode.QRCode(version=1, box_size=10, border=4)
         qr.add_data(qr_url)
         qr.make(fit=True)
