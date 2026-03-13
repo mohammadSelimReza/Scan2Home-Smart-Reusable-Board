@@ -12,6 +12,10 @@ from apps.accounts.permissions import IsAgent
 from apps.properties.models import Property
 from apps.notifications.services import NotificationService
 from apps.common.doc_examples import REASSIGN_BOARD_REQUEST
+import logging
+import traceback
+
+logger = logging.getLogger(__name__)
 
 
 class QRBoardListCreateView(APIView):
@@ -87,27 +91,35 @@ class QRScanRedirectView(APIView):
 
     @extend_schema(responses=OpenApiResponse(description="Redirect URL", response={'type': 'object', 'properties': {'redirect_url': {'type': 'string'}, 'property_id': {'type': 'string'}}}), tags=['QR Boards'])
     def get(self, request, qr_id):
-        board = get_object_or_404(QRBoard, id=qr_id)
-        assignment = board.assignments.filter(is_active=True).select_related('property', 'property__agent').first()
+        try:
+            board = get_object_or_404(QRBoard, id=qr_id)
+            assignment = board.assignments.filter(is_active=True).select_related('property', 'property__agent').first()
 
-        if not assignment:
-            return Response({'error': 'This board has no active property.'}, status=status.HTTP_404_NOT_FOUND)
+            if not assignment:
+                return Response({'error': 'This board has no active property.'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Increment scan counts
-        QRBoard.objects.filter(id=qr_id).update(scan_count=board.scan_count + 1)
-        Property.objects.filter(id=assignment.property.id).update(
-            qr_scanned_count=assignment.property.qr_scanned_count + 1
-        )
+            # Increment scan counts
+            QRBoard.objects.filter(id=qr_id).update(scan_count=board.scan_count + 1)
+            Property.objects.filter(id=assignment.property.id).update(
+                qr_scanned_count=assignment.property.qr_scanned_count + 1
+            )
 
-        # Notify agent
-        NotificationService.create(
-            user=assignment.property.agent,
-            title='QR Code Scanned!',
-            body=f'Someone scanned the QR code for "{assignment.property.title}".',
-            notification_type='qr_scan',
-        )
+            # Notify agent
+            try:
+                NotificationService.create(
+                    user=assignment.property.agent,
+                    title='QR Code Scanned!',
+                    body=f'Someone scanned the QR code for "{assignment.property.title}".',
+                    notification_type='qr_scan',
+                )
+            except Exception as e:
+                logger.error(f"Notification error in QRScanRedirectView: {str(e)}")
 
-        # Return redirect URL
-        from django.conf import settings
-        redirect_url = f"{settings.FRONTEND_URL}/properties/{assignment.property.id}/"
-        return Response({'redirect_url': redirect_url, 'property_id': str(assignment.property.id)})
+            # Return redirect URL
+            from django.conf import settings
+            redirect_url = f"{settings.FRONTEND_URL}/properties/{assignment.property.id}/"
+            return Response({'redirect_url': redirect_url, 'property_id': str(assignment.property.id)})
+        except Exception as e:
+            logger.error(f"Critical error in QRScanRedirectView: {str(e)}")
+            logger.error(traceback.format_exc())
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
