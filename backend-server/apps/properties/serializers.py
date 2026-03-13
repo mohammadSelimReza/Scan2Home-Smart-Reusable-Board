@@ -84,13 +84,60 @@ class PropertyDetailSerializer(serializers.ModelSerializer):
 
 
 class PropertyCreateUpdateSerializer(serializers.ModelSerializer):
+    uploaded_images = serializers.ListField(
+        child=serializers.ImageField(allow_empty_file=False, use_url=False),
+        write_only=True,
+        required=False
+    )
+    uploaded_video = serializers.FileField(write_only=True, required=False)
+
     class Meta:
         model = Property
         exclude = ('agent', 'views_count', 'qr_scanned_count', 'is_approved', 'created_at', 'updated_at')
 
     def create(self, validated_data):
+        images_data = validated_data.pop('uploaded_images', [])
+        video_data = validated_data.pop('uploaded_video', None)
+
         validated_data['agent'] = self.context['request'].user
-        return super().create(validated_data)
+        property_ = super().create(validated_data)
+
+        for index, image_data in enumerate(images_data):
+            is_cover = (index == 0)
+            PropertyImage.objects.create(
+                property=property_, 
+                image=image_data, 
+                is_cover=is_cover, 
+                order=index
+            )
+
+        if video_data:
+            PropertyVideo.objects.create(property=property_, video_file=video_data)
+
+        return property_
+
+    def update(self, instance, validated_data):
+        images_data = validated_data.pop('uploaded_images', [])
+        video_data = validated_data.pop('uploaded_video', None)
+
+        property_ = super().update(instance, validated_data)
+
+        if images_data:
+            existing_count = property_.images.count()
+            for index, image_data in enumerate(images_data):
+                is_cover = (existing_count == 0 and index == 0)
+                PropertyImage.objects.create(
+                    property=property_, 
+                    image=image_data, 
+                    is_cover=is_cover, 
+                    order=existing_count + index
+                )
+
+        if video_data:
+            PropertyVideo.objects.filter(property=property_).delete()
+            PropertyVideo.objects.create(property=property_, video_file=video_data)
+
+        return property_
 
 
 class PropertyImageUploadSerializer(serializers.ModelSerializer):
