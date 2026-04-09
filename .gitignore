@@ -35,4 +35,5 @@ logs/
 django-error.log
 
 # Docker
-.docker/VPS User deeps VPS Password.txt
+.docker/
+VPS User deeps VPS Password.txt

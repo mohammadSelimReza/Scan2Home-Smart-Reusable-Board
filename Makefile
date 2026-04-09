@@ -13,6 +13,7 @@ help:
 	@echo "  make migrate        - Run migrations (dev)"
 	@echo "  make makemigrations - Generate migrations (dev)"
 	@echo "  make seed           - Populate dummy data (dev)"
+	@echo "  make users          - List all users in DB (dev)"
 	@echo "  make test           - Run backend tests"
 	@echo ""
 	@echo "Production Commands (Scan2Home):"
@@ -23,6 +24,7 @@ help:
 	@echo "  make prod-createsuperuser - Create admin user (prod)"
 	@echo "  make prod-migrate   - Run production migrations"
 	@echo "  make prod-seed      - Populate dummy data (prod)"
+	@echo "  make prod-users     - List all users in DB (prod)"
 	@echo "  make prod-dlogs     - Tail live request logs (prod)"
 	@echo ""
 	@echo "Common Utilities:"
@@ -45,6 +47,8 @@ test:
 	$(DOCKER_COMPOSE) exec backend pytest
 seed:
 	$(DOCKER_COMPOSE) exec backend python manage.py populate_dummy_data --count 100
+users:
+	$(DOCKER_COMPOSE) exec backend python manage.py list_users
 
 # ─── PRODUCTION ───────────────────────────────────────────
 prod-up:
@@ -63,6 +67,8 @@ prod-createsuperuser:
 	$(PROD_COMPOSE) exec backend python manage.py createsuperuser
 prod-seed:
 	$(PROD_COMPOSE) exec backend python manage.py populate_dummy_data --count 50
+prod-users:
+	$(PROD_COMPOSE) exec backend python manage.py list_users
 prod-dlogs:
 	$(PROD_COMPOSE) exec backend tail -f logs/requests.log
 dlog: prod-dlogs
