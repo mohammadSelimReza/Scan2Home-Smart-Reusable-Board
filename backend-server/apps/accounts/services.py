@@ -21,7 +21,7 @@ class AuthService:
         """Generate OTP, save to DB, send via email. Returns the code."""
         email = email.strip().lower()
         # Invalidate old OTPs
-        OTPVerification.objects.filter(email=email, is_used=False).update(is_used=True)
+        OTPVerification.objects.filter(email__iexact=email, is_used=False).update(is_used=True)
 
         code = AuthService.generate_otp()
         expires_at = timezone.now() + timedelta(minutes=OTP_EXPIRY)
@@ -50,7 +50,7 @@ class AuthService:
         """Returns True if valid, marks as used."""
         email = email.strip().lower()
         otp = OTPVerification.objects.filter(
-            email=email,
+            email__iexact=email,
             otp_code=code,
             is_used=False,
             expires_at__gt=timezone.now(),
