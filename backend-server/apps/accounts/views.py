@@ -141,7 +141,13 @@ class ForgotPasswordView(APIView):
             # Don't reveal if email exists
             return Response({'message': 'If this email is registered, you will receive an OTP.'})
 
-        AuthService.send_otp(email)
+        try:
+            AuthService.send_otp(email)
+        except Exception:
+            return Response(
+                {'error': 'We could not send the OTP right now. Please try again shortly.'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
         return Response({'message': 'OTP sent to your email.'})
 
 
@@ -158,7 +164,7 @@ class VerifyOTPView(APIView):
             consume=False
         )
         if not is_valid:
-            return Response({'error': 'Invalid or expired OTP.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid or expired OTP. Please request a new one if needed.'}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'message': 'OTP verified.'})
 
 
@@ -173,7 +179,7 @@ class ResetPasswordView(APIView):
 
         is_valid = AuthService.verify_otp(data['email'], data['otp_code'])
         if not is_valid:
-            return Response({'error': 'Invalid or expired OTP.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid or expired OTP. Please request a new one if needed.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             user = User.objects.get(email=data['email'])

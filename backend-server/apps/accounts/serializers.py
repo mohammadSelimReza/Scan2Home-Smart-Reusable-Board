@@ -122,6 +122,9 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
+    def validate_email(self, value):
+        return value.strip().lower()
+
 
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(write_only=True)
@@ -137,16 +140,25 @@ class ChangePasswordSerializer(serializers.Serializer):
 class ForgotPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
+    def validate_email(self, value):
+        return value.strip().lower()
+
 
 class VerifyOTPSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    otp_code = serializers.CharField(max_length=4, min_length=4)
+    otp_code = serializers.RegexField(regex=r'^\d{4}$')
+
+    def validate_email(self, value):
+        return value.strip().lower()
 
 
 class ResetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    otp_code = serializers.CharField(max_length=4, min_length=4)
+    otp_code = serializers.RegexField(regex=r'^\d{4}$')
     new_password = serializers.CharField(write_only=True, min_length=8)
+
+    def validate_email(self, value):
+        return value.strip().lower()
 
 
 # ── Notification settings ────────────────────────────────────
